@@ -1,0 +1,21 @@
+{
+  "generator-template-ui5-project": {
+    "projectname": "mapApp",
+    "namespaceUI5": "com.YPF",
+    "platform": "Application Router @ Cloud Foundry",
+    "viewtype": "XML",
+    "ui5libs": "Content delivery network (SAPUI5)",
+    "newdir": false,
+    "namespaceURI": "com/YPF",
+    "opa5pos": [
+      "Main"
+    ],
+    "opa5Journeys": [
+      "Main"
+    ],
+    "uimodules": [
+      "uimodule"
+    ],
+    "setupCompleted": true
+  }
+}
