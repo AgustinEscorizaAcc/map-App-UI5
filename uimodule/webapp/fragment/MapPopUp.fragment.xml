@@ -1,0 +1,19 @@
+<core:FragmentDefinition
+    xmlns:core="sap.ui.core"
+    xmlns="sap.m">
+    <Popover title="Location Info" initialFocus="id_IPGridNo" contentWidth="15rem" placement="Top" class="sapUiSizeCompact sapUiContentPadding">
+        <!--  <Text text="Location info" /> -->
+        <!--  <Label text="Place : " ></Label>-->
+        <Input placeholder="Grid Nr..." id="id_IPGridNo"/>
+        <!--  <Label text="City : " ></Label>-->
+        <Input placeholder="Project ID..." id="id_IPProjID"/>
+
+        <footer>
+            <Toolbar class="cl_PopFoot">
+                <ToolbarSpacer/>
+                <Button class="cl_PopFoot" id="id_BtnSave" text="Save" press="fnSave"/>
+                <Button class="cl_PopFoot" id="id_BtnCancel" text="Cancel" press="fnCancel"/>
+            </Toolbar>
+        </footer>
+    </Popover>
+</core:FragmentDefinition>

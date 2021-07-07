@@ -1,12 +1,69 @@
  <mvc:View controllerName="com.YPF.mapApp.controller.MainView"
   displayBlock="true"
   xmlns="sap.m"
+  xmlns:core="sap.ui.core"
+  xmlns:uxap="sap.uxap"
   xmlns:mvc="sap.ui.core.mvc">
   <App id="idAppControl" >
     <pages>
-      <Page title="{i18n>title}">
-        <content></content>
-      </Page>
+      <uxap:ObjectPageLayout
+        id="id_GmapPage"
+        upperCaseAnchorBar="false"
+        class="sapUiNoContentPadding">
+        <uxap:headerTitle>
+          <uxap:ObjectPageDynamicHeaderTitle>
+            <uxap:heading>
+              	<Input
+                  width="15rem"
+                  class="sapUiTinyMarginBottom"
+                  id="placeInput"
+                  textFormatMode="KeyValue"
+                  submit="onAfterRendering"
+                  placeholder="{i18n>EnterPlace}">
+                  <!-- suggestionItems="{/Purchases}"
+                  suggestionItemSelected="handleInputSuggestionItemSelected"
+                  showSuggestion="true"
+                  autocomplete="false"
+                  showValueHelp="true"
+                  change="handleInputChange"
+                  valueHelpRequest="handleInputValueHelpOpen"
+                  <suggestionItems>
+                    
+                  </suggestionItems> -->
+                </Input>
+            </uxap:heading>
+          </uxap:ObjectPageDynamicHeaderTitle>
+        </uxap:headerTitle>
+        <uxap:headerContent>
+          <Input
+            width="15rem"
+            class="sapUiTinyMarginBottom sapUiTinyMarginEnd"
+            id="fromInput"
+            textFormatMode="KeyValue"
+            submit="handleInputSubmitFrom"
+            placeholder="{i18n>EnterFrom}">
+          </Input>
+          <Input
+            width="15rem"
+            class="sapUiTinyMarginBottom"
+            id="toInput"
+            textFormatMode="KeyValue"
+            submit="handleInputSubmitTo"
+            placeholder="{i18n>EnterTo}">
+          </Input>
+        </uxap:headerContent>
+        <uxap:sections>
+            <uxap:ObjectPageSection showTitle="false">
+              <uxap:subSections >
+                <uxap:ObjectPageSubSection class="sapUxAPObjectPageSubSectionFitContainer">
+                  <HBox id="id_GMapContainer" fitContainer="true" justifyContent="Center" alignItems="Center" class="sapUiNoContentPadding">
+                  
+                  </HBox>
+                </uxap:ObjectPageSubSection>
+              </uxap:subSections>
+            </uxap:ObjectPageSection>
+        </uxap:sections>
+      </uxap:ObjectPageLayout>
     </pages>
   </App>
 </mvc:View>
