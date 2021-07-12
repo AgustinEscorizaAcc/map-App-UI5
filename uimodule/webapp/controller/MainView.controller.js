@@ -10,12 +10,13 @@ sap.ui.define(
           this.vDataCheck = false;
           this.vGLat = null;
           this.vGLang = null;
+          this.map = null;
           this.vGDMatIndex = 0; //Ojo
           // this.getGDATA(); si se pudiera cargar un JSON con ajax aca puedo traer markers guardados, y guardarlos cuando se crean 
           let oGoogleModel = new JSONModel([]);
           this.getView().setModel(oGoogleModel, "GDATA");
       },
-      onAfterRendering: function () {
+      onAfterRendering: function ( oEvent) {
         this.vDataCheck = false;
         if (!this.initialized) {
           this.initialized = true;
@@ -31,6 +32,7 @@ sap.ui.define(
             this.getView().byId("id_GMapContainer").getDomRef(),
             mapOptions
           );
+          this.map = map;
           let infowindow = new google.maps.InfoWindow();
           let geocoder = new google.maps.Geocoder();
           let marker = new google.maps.Marker({
@@ -39,7 +41,7 @@ sap.ui.define(
           //------------------ llamo a la funcion de crear marcador-----------//
           this.fnGMapMarkerCreateOnClick(map, geocoder, infowindow);
         } else if (this.initialized === true) {
-          this.fnSearch();
+          this.fnSearch(oEvent);
         }
       },
       fnGMapMarkerCreateOnClick: function (map, geocoder, infowindow) {
@@ -90,7 +92,7 @@ sap.ui.define(
         let that = this;
         let oView = this.getView();
         this.vDataCheck = false;
-        let oInput = oView.byId("placeInput"); // no es un boton como el del ejemplo
+        //let oInput = oView.byId("placeInput"); // no es un boton como el del ejemplo
         let lolatitude = e.latLng.lat(),
           lolongitude = e.latLng.lng();
         (this.vGLat = lolatitude), (this.vGLang = lolongitude);
@@ -157,7 +159,6 @@ sap.ui.define(
         this._PopDialog.close();
       },
       fnDataProcess: function (oData){
-          let oView = this.getView();
           if (this.vDataCheck){
               this.getView().getModel("GDATA").getData()[this.vGDMatIndex].Grid = oData[0].Grid;
               this.getView().getModel("GDATA").getData()[this.vGDMatIndex].Project = oData[0].Project;
@@ -169,20 +170,25 @@ sap.ui.define(
               this.getView().getModel("GDATA").refresh();
           }
       },
-      fnSearch: function(){
+      fnSearch: function(oEvent){
           let that = this;
-          let newMap = new google.maps.Map(this.getView().byId("id_GMapContainer").getDomRef(), mapOptions);
-          let address = this.getView().byId("placeInput").getValue();
+          let map = null;
+          if (this.map != null){
+            map = this.map;
+          } else {
+            map = new google.maps.Map(this.getView().byId("id_GMapContainer").getDomRef(), mapOptions);
+          }
+          let address = oEvent.getParameter("value");
           this.geocoder.geocode( {'address': address }, function(results,status){
               if (status == google.maps.GeocoderStatus.OK){
-                newMap.setCenter(results[0].geometry.location);
+                map.setCenter(results[0].geometry.location);
                 let infowindow = new google.maps.InfoWindow;
                 let geocoder = new google.maps.Geocoder();
                 let marker = new google.maps.Marker({
-                    map: newMap,
+                    map: map,
                     position: results[0].geometry.location
                 });
-                that.fnGMapMarkerCreateOnClick(newMap, geocoder, infowindow); // this me devolvia undefined por eso that(wtf)
+                that.fnGMapMarkerCreateOnClick(map, geocoder, infowindow); // this me devolvia undefined por eso that(wtf)
 
                 google.maps.event.addListener(marker, "click", function (e){
                     window.setTimeout(function(){
@@ -192,6 +198,24 @@ sap.ui.define(
               } else { alert("GeoCode fallo por la siguiente razon: " + status)};
           });
           return;
+      },
+      onPressDrawRoute: function(oEvent){
+        var directionsRenderer = new google.maps.DirectionsRenderer({
+          map: this.map
+        });
+        var directionsService = new google.maps.DirectionsService;
+        let oOrign = oEvent.getSource().getParent().getAggregation("content")[0].getLastValue();
+        let oDestination = oEvent.getSource().getParent().getAggregation("content")[1].getLastValue();
+        var req = {
+          origin: oOrign,
+          destination: oDestination,
+          travelMode: 'DRIVING'
+        };
+        directionsService.route(req, function(response, status) {
+          if (status === 'OK') {
+            directionsRenderer.setDirections(response);
+        }
+        });
       }
     });
   }

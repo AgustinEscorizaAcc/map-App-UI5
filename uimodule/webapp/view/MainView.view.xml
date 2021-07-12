@@ -35,22 +35,25 @@
           </uxap:ObjectPageDynamicHeaderTitle>
         </uxap:headerTitle>
         <uxap:headerContent>
+          <!-- <Title text="Desde:" class="sapUiTinyMarginTop"/> -->
           <Input
             width="15rem"
             class="sapUiTinyMarginBottom sapUiTinyMarginEnd"
             id="fromInput"
             textFormatMode="KeyValue"
-            submit="handleInputSubmitFrom"
+            submit="onAfterRendering"
             placeholder="{i18n>EnterFrom}">
           </Input>
+          <!-- <Title text="Hasta:" class="sapUiTinyMarginTop"/> -->
           <Input
             width="15rem"
-            class="sapUiTinyMarginBottom"
+            class="sapUiTinyMarginBottom sapUiTinyMarginEnd"
             id="toInput"
             textFormatMode="KeyValue"
-            submit="handleInputSubmitTo"
+            submit="onAfterRendering"
             placeholder="{i18n>EnterTo}">
           </Input>
+          <Button class="sapUiTinyMarginBottom sapUiTinyMarginEnd" text="Dibujar Ruta" press="onPressDrawRoute" />
         </uxap:headerContent>
         <uxap:sections>
             <uxap:ObjectPageSection showTitle="false">
