@@ -1,8 +1,9 @@
 sap.ui.define(
   [ "com/YPF/mapApp/controller/BaseController",
     "sap/m/MessageToast",
-    "sap/ui/model/json/JSONModel"],
-  function (Controller, MessageToast, JSONModel) {
+    "sap/ui/model/json/JSONModel",
+    "sap/base/util/uid"],
+  function (Controller, MessageToast, JSONModel,uid) {
     "use strict";
 
     return Controller.extend("com.YPF.mapApp.controller.MainView", {
@@ -12,7 +13,8 @@ sap.ui.define(
           this.vGLang = null;
           this.map = null;
           this.vGDMatIndex = 0; //Ojo
-          // this.getGDATA(); si se pudiera cargar un JSON con ajax aca puedo traer markers guardados, y guardarlos cuando se crean 
+          this.markers = [];
+          // this.getGDATA(); si se pudiera cargar un JSON con ajax aca puedo traer markers guardados, y guardarlos cuando se crean
           let oGoogleModel = new JSONModel([]);
           this.getView().setModel(oGoogleModel, "GDATA");
       },
@@ -33,11 +35,11 @@ sap.ui.define(
             mapOptions
           );
           this.map = map;
+          const centerControlDiv = document.createElement("div");
+          this.centerControl(centerControlDiv);
+          map.controls[google.maps.ControlPosition.RIGHT_TOP].push(centerControlDiv);
           let infowindow = new google.maps.InfoWindow();
           let geocoder = new google.maps.Geocoder();
-          let marker = new google.maps.Marker({
-            map: map,
-          });
           //------------------ llamo a la funcion de crear marcador-----------//
           this.fnGMapMarkerCreateOnClick(map, geocoder, infowindow);
         } else if (this.initialized === true) {
@@ -71,13 +73,27 @@ sap.ui.define(
                 let marker = new google.maps.Marker({
                   position: results[0].geometry.location,
                   map: map,
+                  id: uid()
                 });
-
+                that.markers.push(marker);
                 // Mouse click event para el marcador
                 google.maps.event.addListener(marker, "click", function (e) {
                   window.setTimeout(function(){
                     that.fnOnClickPlace(e);
                   }, 100);
+                });
+                google.maps.event.addListener(marker, "rightclick", async function (oEvent) {
+                  let oMarker = await that.markers.find((iterableMarker)=>
+                  {
+                    if (iterableMarker.internalPosition === oEvent.latLng) {
+                      return iterableMarker;
+                    } else {
+                      return null;
+                    }
+                  });
+                  if (oMarker != null){
+                    oMarker.setMap(null);
+                  };
                 });
               } else {
                 window.alert("No results found");
@@ -87,6 +103,37 @@ sap.ui.define(
             }
           });
         }
+      },
+      centerControl: function(controlDiv){
+        // Set CSS for the control border.
+        const controlUI = document.createElement("div");
+        controlUI.style.backgroundColor = "#fff";
+        controlUI.style.border = "2px solid #fff";
+        controlUI.style.borderRadius = "3px";
+        controlUI.style.boxShadow = "0 2px 6px rgba(0,0,0,.3)";
+        controlUI.style.cursor = "pointer";
+        controlUI.style.marginTop = "8px";
+        controlUI.style.marginBottom = "22px";
+        controlUI.style.textAlign = "center";
+        controlUI.title = "Click to recenter the map";
+        controlDiv.appendChild(controlUI);
+        // Set CSS for the control interior.
+        const controlText = document.createElement("div");
+        controlText.style.color = "rgb(25,25,25)";
+        controlText.style.fontFamily = "Roboto,Arial,sans-serif";
+        controlText.style.fontSize = "16px";
+        controlText.style.lineHeight = "38px";
+        controlText.style.paddingLeft = "5px";
+        controlText.style.paddingRight = "5px";
+        controlText.innerHTML = "Remove All Markers";
+        controlUI.appendChild(controlText);
+        // Setup the click event listeners: simply set the map to Chicago.
+        controlUI.addEventListener("click", () => {
+          for ( let marker of this.markers){
+            marker.setMap(null);
+          }
+          this.markers = [];
+        });
       },
       fnOnClickPlace: function (e) {
         let that = this;
@@ -155,6 +202,24 @@ sap.ui.define(
 
         } else { MessageToast.show( "Por favor Ingrese valores para guardar"); }
       },
+      fnRemoveMarker: function(){
+        this.markers;
+        if (this.getView().getModel("GDATA").getData()) {
+          let vGDJSONLen = this.getView().getModel("GDATA").getData().length;
+          for (let i = 0; i < vGDJSONLen; i++) {
+            if (
+              Number(this.getView().getModel("GDATA").getData()[i].Lat) ==
+                Number(that.vGLat) &&
+              Number(this.getView().getModel("GDATA").getData()[i].Lang) ==
+                Number(that.vGLang)
+            ) {
+              sap.ui.getCore().byId("id_IPGridNo").setValue("");
+              sap.ui.getCore().byId("id_IPProjID").setValue("");
+              break;
+            }
+          }
+        }
+      },
       fnCancel: function(){
         this._PopDialog.close();
       },
@@ -172,30 +237,37 @@ sap.ui.define(
       },
       fnSearch: function(oEvent){
           let that = this;
-          let map = null;
-          if (this.map != null){
-            map = this.map;
-          } else {
-            map = new google.maps.Map(this.getView().byId("id_GMapContainer").getDomRef(), mapOptions);
-          }
+          let map = this.map;
           let address = oEvent.getParameter("value");
-          this.geocoder.geocode( {'address': address }, function(results,status){
+          this.geocoder.geocode( {'address': address }, function(results, status){
               if (status == google.maps.GeocoderStatus.OK){
-                map.setCenter(results[0].geometry.location);
+                map.panTo(results[0].geometry.location);
                 let infowindow = new google.maps.InfoWindow;
                 let geocoder = new google.maps.Geocoder();
                 let marker = new google.maps.Marker({
                     map: map,
                     position: results[0].geometry.location
                 });
-                that.fnGMapMarkerCreateOnClick(map, geocoder, infowindow); // this me devolvia undefined por eso that(wtf)
-
+                that.markers.push(marker);
                 google.maps.event.addListener(marker, "click", function (e){
                     window.setTimeout(function(){
                       that.fnOnClickPlace(e);
                     }, 100);
                 });
-              } else { alert("GeoCode fallo por la siguiente razon: " + status)};
+                google.maps.event.addListener(marker, "rightclick", async function (oEvent) {
+                  let oMarker = await that.markers.find((iterableMarker)=>
+                  {
+                    if (iterableMarker.internalPosition === oEvent.latLng) {
+                      return iterableMarker;
+                    } else {
+                      return null;
+                    }
+                  });
+                  if (oMarker != null){
+                    oMarker.setMap(null);
+                  };
+                });
+              } else { alert("GeoCode fallo por la siguiente razon: " + status);};
           });
           return;
       },
@@ -214,7 +286,9 @@ sap.ui.define(
         directionsService.route(req, function(response, status) {
           if (status === 'OK') {
             directionsRenderer.setDirections(response);
-        }
+          } else {
+            MessageToast.show( "Esa ruta no es posible");
+          }
         });
       }
     });

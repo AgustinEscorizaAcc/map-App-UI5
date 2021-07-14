@@ -18,7 +18,7 @@
                   class="sapUiTinyMarginBottom"
                   id="placeInput"
                   textFormatMode="KeyValue"
-                  submit="onAfterRendering"
+                  submit="fnSearch"
                   placeholder="{i18n>EnterPlace}">
                   <!-- suggestionItems="{/Purchases}"
                   suggestionItemSelected="handleInputSuggestionItemSelected"
@@ -41,7 +41,6 @@
             class="sapUiTinyMarginBottom sapUiTinyMarginEnd"
             id="fromInput"
             textFormatMode="KeyValue"
-            submit="onAfterRendering"
             placeholder="{i18n>EnterFrom}">
           </Input>
           <!-- <Title text="Hasta:" class="sapUiTinyMarginTop"/> -->
@@ -50,7 +49,6 @@
             class="sapUiTinyMarginBottom sapUiTinyMarginEnd"
             id="toInput"
             textFormatMode="KeyValue"
-            submit="onAfterRendering"
             placeholder="{i18n>EnterTo}">
           </Input>
           <Button class="sapUiTinyMarginBottom sapUiTinyMarginEnd" text="Dibujar Ruta" press="onPressDrawRoute" />
@@ -60,7 +58,7 @@
               <uxap:subSections >
                 <uxap:ObjectPageSubSection class="sapUxAPObjectPageSubSectionFitContainer">
                   <HBox id="id_GMapContainer" fitContainer="true" justifyContent="Center" alignItems="Center" class="sapUiNoContentPadding">
-                  
+
                   </HBox>
                 </uxap:ObjectPageSubSection>
               </uxap:subSections>
