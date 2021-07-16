@@ -1,5 +1,13 @@
 /* Enter your custom styles here */
-.sapUxAPObjectPageSection .sapUxAPObjectPageSectionContainer .sapUxAPObjectPageSubSection .sapUxAPBlockContainer {
+/* .sapUxAPObjectPageSection .sapUxAPObjectPageSectionContainer .sapUxAPObjectPageSubSection .sapUxAPBlockContainer {
     padding-bottom: 0;
     PADDING: unset !important;
+} */
+.sapFAvatarXL {
+    height: 5rem !important;
+    width: 9rem !important;
+}
+.sapFAvatarS {
+    height: 3rem !important;
+    width: 5rem !important;
 }

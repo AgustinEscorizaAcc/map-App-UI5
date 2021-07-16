@@ -1,70 +1,154 @@
- <mvc:View controllerName="com.YPF.mapApp.controller.MainView"
+<mvc:View controllerName="com.YPF.mapApp.controller.MainView"
   displayBlock="true"
   xmlns="sap.m"
   xmlns:core="sap.ui.core"
   xmlns:uxap="sap.uxap"
+  xmlns:f="sap.f"
   xmlns:mvc="sap.ui.core.mvc">
-  <App id="idAppControl" >
-    <pages>
-      <uxap:ObjectPageLayout
-        id="id_GmapPage"
-        upperCaseAnchorBar="false"
-        class="sapUiNoContentPadding">
-        <uxap:headerTitle>
-          <uxap:ObjectPageDynamicHeaderTitle>
-            <uxap:heading>
-              	<Input
-                  width="15rem"
-                  class="sapUiTinyMarginBottom"
-                  id="placeInput"
-                  textFormatMode="KeyValue"
-                  submit="fnSearch"
-                  placeholder="{i18n>EnterPlace}">
-                  <!-- suggestionItems="{/Purchases}"
-                  suggestionItemSelected="handleInputSuggestionItemSelected"
-                  showSuggestion="true"
-                  autocomplete="false"
-                  showValueHelp="true"
-                  change="handleInputChange"
-                  valueHelpRequest="handleInputValueHelpOpen"
-                  <suggestionItems>
-                    
-                  </suggestionItems> -->
-                </Input>
-            </uxap:heading>
-          </uxap:ObjectPageDynamicHeaderTitle>
-        </uxap:headerTitle>
-        <uxap:headerContent>
-          <!-- <Title text="Desde:" class="sapUiTinyMarginTop"/> -->
-          <Input
-            width="15rem"
-            class="sapUiTinyMarginBottom sapUiTinyMarginEnd"
-            id="fromInput"
-            textFormatMode="KeyValue"
-            placeholder="{i18n>EnterFrom}">
-          </Input>
-          <!-- <Title text="Hasta:" class="sapUiTinyMarginTop"/> -->
-          <Input
-            width="15rem"
-            class="sapUiTinyMarginBottom sapUiTinyMarginEnd"
-            id="toInput"
-            textFormatMode="KeyValue"
-            placeholder="{i18n>EnterTo}">
-          </Input>
-          <Button class="sapUiTinyMarginBottom sapUiTinyMarginEnd" text="Dibujar Ruta" press="onPressDrawRoute" />
-        </uxap:headerContent>
-        <uxap:sections>
-            <uxap:ObjectPageSection showTitle="false">
-              <uxap:subSections >
-                <uxap:ObjectPageSubSection class="sapUxAPObjectPageSubSectionFitContainer">
-                  <HBox id="id_GMapContainer" fitContainer="true" justifyContent="Center" alignItems="Center" class="sapUiNoContentPadding">
+    <App id="idAppControl">
+        <pages>
+            <f:DynamicPage 
+                id="dynamicPageId"
+                headerExpanded="false" class="sapUiResponsiveContentPadding">
+                <f:title>
+                <f:DynamicPageTitle>
+                    <f:heading>
+                        <Title text="{i18n>masterTitle}"/>
+                    </f:heading>
+                    <f:expandedContent>
+                        <Label text="{i18n>masterLabelSubtitle}"/>
+                    </f:expandedContent>
+                    <f:snappedContent>
+                        <Label text="{i18n>masterLabelSubtitle}"/>
+                    </f:snappedContent>
+                    <f:snappedTitleOnMobile>
+                        <Title text="{i18n>masterPage}"/>
+                    </f:snappedTitleOnMobile>
+                    <f:content>
 
-                  </HBox>
-                </uxap:ObjectPageSubSection>
-              </uxap:subSections>
-            </uxap:ObjectPageSection>
-        </uxap:sections>
-      </uxap:ObjectPageLayout>
-    </pages>
-  </App>
+                    </f:content>
+                    <f:actions>
+                        <Button text="Crear" type="Emphasized" />
+                        <Button icon="sap-icon://action" type="Transparent"/>
+                    </f:actions>
+                    <f:navigationActions>
+                        <Button icon="sap-icon://full-screen" type="Transparent" />
+                        <Button icon="sap-icon://exit-full-screen" type="Transparent" />
+                        <Button icon="sap-icon://decline" type="Transparent" />
+                    </f:navigationActions>
+                </f:DynamicPageTitle>
+            </f:title>
+            <f:header>
+            </f:header>
+            <f:content>
+                <Table
+                    showNoData="false">
+                        <headerToolbar>
+                            <OverflowToolbar>
+                                <!-- <FacetFilter
+                                        id="idFacetFilterDriver"
+                                        type="Simple"
+                                        showPersonalization="true"
+                                        showReset="true"
+                                        reset="handleFacetFilterReset"
+                                        confirm="handleConfirm"
+                                        lists=""> 
+                                            <FacetFilterList
+                                                title=""
+                                                key=""
+                                                mode="MultiSelect"
+                                                items="" >
+                                                    <FacetFilterItem
+                                                        text=""
+                                                        key=""
+                                                        count="" />
+                                            </FacetFilterList>
+                                </FacetFilter> -->
+                                <ToolbarSpacer/>
+                                <SearchField width="20%" placeholder="Buscar por codigo" class="sapUiSmallMargin" liveChange="onFilterDrivers"/>
+                                <!-- <Select
+                                    class="sapUiSmallMargin"
+                                    forceSelection="true"
+                                    selectedKey="{utilsModel>/driversHeaderFilter}"
+                                    items="{driversSorterAndFilterModel>/}">
+                                    <core:Item key="{driversSorterAndFilterModel>key}" text="{driversSorterAndFilterModel>name}" />
+                                </Select> -->
+                                <Button
+                                    tooltip="Sort"
+                                    icon="sap-icon://sort"
+                                    press="onSortDriversButtonPressed"
+                                    ariaHasPopup="Dialog"/>
+                                <Button icon="sap-icon://action-settings" press="onPersoButtonPressedDri" >
+                                    <layoutData>
+                                        <OverflowToolbarLayoutData priority="NeverOverflow" />
+                                    </layoutData>
+                                </Button>
+                            </OverflowToolbar>
+                        </headerToolbar>
+                    </Table>
+                    <!--Aca va el ScrollBar-->
+                    <ScrollContainer  width="100%" height="40rem" horizontal="true" vertical="true" focusable="true" >
+                    <Table
+                        id="driversTable"
+                        inset="false"
+                        items="{RoutesModel>/}">
+                        <columns>   
+                            <Column
+                                id="idRuta" 
+                                width="12em">
+                                <Text text="{i18n>idRoute}" />
+                            </Column>
+                            <Column
+                                id="routeFrom"
+                                hAlign="Center"
+                                demandPopin="true">
+                                <Text text="{i18n>routeFrom}" />
+                            </Column>
+                            <Column
+                                id="routeTo"
+                                demandPopin="true"
+                                hAlign="Center">
+                                <Text text="{i18n>routeTo}" />
+                            </Column>
+                            <Column
+                                id="routeDriver"
+                                demandPopin="true"
+                                hAlign="Center">
+                                <Text text="{i18n>routeDriver}"/>
+                            </Column>
+                            <Column
+                                id="vehicleId"
+                                demandPopin="true"
+                                hAlign="Center">
+                                <Text text="{i18n>routeVehicleId}" />
+                            </Column>
+                            <Column
+                                id="status"
+                                hAlign="End">
+                                <Text text="{i18n>routeStatus}" />
+                            </Column>
+                        </columns>
+                        <items>
+                            <ColumnListItem
+                                type="Navigation"
+                                press="onPressGoToRouteDetail">
+                                <cells>
+                                    <ObjectIdentifier
+                                        title="{RoutesModel>ROU_ID}"/>
+                                    <ObjectStatus text="{parts: ['RoutesModel>LOCATION_FROM/LO_COUNTRY', 'RoutesModel>LOCATION_FROM/LO_CITY']}"/>
+                                    <ObjectStatus text="{parts: ['RoutesModel>LOCATION_TO/LO_COUNTRY', 'RoutesModel>LOCATION_TO/LO_CITY']}"/>
+                                    <ObjectStatus text="{parts: ['RoutesModel>DRIVER/DRI_NAME', 'RoutesModel>DRIVER/DRI_LASTNAME']}"/>
+                                    <ObjectStatus text="{RoutesModel>VEHICLE/VEH_ID}"/>
+                                    <ObjectStatus text="{path: 'RoutesModel>ROU_STATUS', formatter: '.formatter.formatRouteStatusToText'}" state="{path: 'RoutesModel>ROU_STATUS', formatter: '.formatter.formatRouteStatusToState'}"  class="sapMObjectStatusMedium"/>         
+                                </cells>
+                            </ColumnListItem>
+                        </items>
+                    </Table> 
+                    </ScrollContainer>
+            </f:content>
+            <f:footer>
+            </f:footer>
+            </f:DynamicPage>
+        </pages>
+    </App>
 </mvc:View>

@@ -73,16 +73,26 @@
       "routes": [
         {
           "name": "RouteMainView",
-          "pattern": "RouteMainView",
+          "pattern": "",
           "target": ["TargetMainView"]
+        },
+        {
+          "name": "RouteDetail",
+          "pattern": "RouteDetail",
+          "target": "RouteDetailTarget"
         }
       ],
       "targets": {
         "TargetMainView": {
           "viewType": "XML",
           "viewLevel": 1,
-          "viewId": "idAppControl",
+          "viewId": "mainView",
           "viewName": "MainView"
+        },
+        "RouteDetailTarget": {
+          "viewType": "XML",
+          "viewId": "routeDetail",
+          "viewName": "RouteDetail"
         }
       }
     }

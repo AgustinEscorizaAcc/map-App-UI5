@@ -3,9 +3,10 @@ sap.ui.define(
         "sap/ui/core/mvc/Controller",
         "sap/ui/core/routing/History",
         "sap/ui/core/UIComponent",
-        "com/YPF/mapApp/model/formatter"
+        "com/YPF/mapApp/model/Formatter",
+        "com/YPF/mapApp/model/Constants"
     ],
-    function (Controller, History, UIComponent, formatter) {
+    function (Controller, History, UIComponent, formatter, Constants) {
         "use strict";
 
         return Controller.extend("com.YPF.mapApp.controller.BaseController", {
@@ -62,7 +63,7 @@ sap.ui.define(
                 if (sPreviousHash !== undefined) {
                     window.history.back();
                 } else {
-                    this.getRouter().navTo("appHome", {}, true /*no history*/);
+                    this.getRouter().navTo(Constants.targets.MAIN_VIEW, {}, true /*no history*/);
                 }
             }
         });

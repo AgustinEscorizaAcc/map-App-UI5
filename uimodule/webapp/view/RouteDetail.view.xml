@@ -1,0 +1,227 @@
+ <mvc:View controllerName="com.YPF.mapApp.controller.RouteDetail"
+  displayBlock="true"
+  xmlns="sap.m"
+  xmlns:core="sap.ui.core"
+  xmlns:uxap="sap.uxap"
+  xmlns:mvc="sap.ui.core.mvc"
+  xmlns:form="sap.ui.layout.form">
+  <uxap:ObjectPageLayout
+    id="id_GmapPage"
+    upperCaseAnchorBar="false"
+    isChildPage="true"
+    class="sapUiNoContentPadding">
+    <uxap:headerTitle>
+      <uxap:ObjectPageDynamicHeaderTitle>
+        <uxap:expandedHeading>
+            <Title text="{i18n>routeDetailTitle}" />
+        </uxap:expandedHeading>
+        <uxap:expandedContent>
+          <HBox>
+            <Label text="ID:"/>
+            <ObjectStatus text="{RouteModel>/ROU_ID}" class="sapUiTinyMarginBegin"/>
+          </HBox>
+				</uxap:expandedContent>
+        <uxap:snappedHeading>
+          <HBox>
+            <Avatar src="data:image/png;base64,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"
+              class="sapUiMediumMarginEnd"
+							displayShape="Square"/>
+            <VBox>
+              <Title text="{i18n>routeDetailTitle}" />
+              <Text text="{RouteModel>/ROU_ID}"/>
+            </VBox>
+          </HBox>
+				</uxap:snappedHeading>
+        <uxap:snappedTitleOnMobile>
+					<Title text="{i18n>routeDetailTitle}"/>
+				</uxap:snappedTitleOnMobile>
+        <uxap:actions>
+          <uxap:ObjectPageHeaderActionButton icon="sap-icon://nav-back" type="Transparent" press="onNavBack" tooltip="{i18n>routeDetailBtnBack}"/>
+					<Button text="Guardar" type="Emphasized" />
+					<Button text="Cancelar" />
+        </uxap:actions>
+      </uxap:ObjectPageDynamicHeaderTitle>
+    </uxap:headerTitle>
+    <uxap:headerContent>
+      <!-- <Title text="Desde:" class="sapUiTinyMarginTop"/> -->
+      <FlexBox justifyContent="SpaceBetween" class="sapUiLargeMarginEnd">
+        <VBox  class="sapUiLargeMarginEnd ">
+          <HBox>
+            <Avatar src="data:image/png;base64,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"
+            class="sapUiMediumMarginEnd sapUiSmallMarginBottom"
+            displayShape="Square"
+            displaySize="XL"/>
+            <VBox>
+              <HBox class="sapUiSmallMarginBottom" renderType="Bare">
+                <Label text="ID Vehiculo:" class="sapUiTinyMarginEnd"/>
+                <ObjectStatus text="{RouteModel>/VEHICLE/VEH_ID}"/>
+              </HBox>
+              <HBox class="sapUiSmallMarginBottom" renderType="Bare" >
+                <Label text="ID Conductor:" class="sapUiTinyMarginEnd"/>
+                <ObjectStatus text="{RouteModel>/DRIVER/DRI_ID}"/>
+              </HBox>
+              <HBox>
+                <Label text="ID Cargamento:" class="sapUiTinyMarginEnd"/>
+                <ObjectStatus text="{RouteModel>/SHIPMENT/SHP_ID}"/>
+              </HBox>
+            </VBox>
+          </HBox>
+        </VBox>
+        <VBox class="sapUiLargeMarginEnd sapUiSmallMarginBottom">
+					<Title text="Status" class="sapUiTinyMarginBottom" />
+					<ObjectStatus  text="{path: 'RouteModel>/ROU_STATUS', formatter: '.formatter.formatRouteStatusToText'}" state="{path: 'RouteModel>/ROU_STATUS', formatter: '.formatter.formatRouteStatusToState'}"
+						class="sapMObjectStatusLarge" />
+        </VBox>
+        <VBox class="sapUiLargeMarginEnd sapUiSmallMarginBottom">
+          <Title text="Desde" class="sapUiTinyMarginBottom"/>
+          <ObjectStatus text="{parts: ['RouteModel>/LOCATION_FROM/LO_COUNTRY', 'RouteModel>/LOCATION_FROM/LO_CITY']}" 	class="sapMObjectStatusLarge"/>
+        </VBox>
+        <VBox class="sapUiLargeMarginEnd sapUiSmallMarginBottom">
+          <Title text="Hasta" class="sapUiTinyMarginBottom"/>
+          <ObjectStatus text="{parts: ['RouteModel>/LOCATION_TO/LO_COUNTRY', 'RouteModel>/LOCATION_TO/LO_CITY']}" 	class="sapMObjectStatusLarge"/>
+        </VBox>
+      </FlexBox>
+    </uxap:headerContent>
+    <uxap:sections>
+        <uxap:ObjectPageSection showTitle="false" title="Info Transporte">
+          <uxap:subSections >
+            <uxap:ObjectPageSubSection title="Vehiculo" showTitle="false">
+              <uxap:blocks>
+                <form:SimpleForm class="sapUxAPObjectPageSubSectionAlignContent"
+                  layout="ColumnLayout"
+                  columnsM="2"
+                  columnsL="3"
+                  columnsXL="4">
+                  <core:Title text="Informacion Vehiculo"/>
+
+                  <Label text="ID"/>
+                  <Text text="{RouteModel>/VEHICLE/VEH_ID}"/>
+                  <Label text="Marca"/>
+                  <Text text="{RouteModel>/VEHICLE/VEH_BRAND}"/>
+                  <Label text="Modelo"/>
+                  <Text text="{RouteModel>/VEHICLE/VEH_MODEL}"/>
+                  <Label text="Tipo"/>
+                  <Text text="{RouteModel>/VEHICLE/VEH_TYPE}"/>
+                  <Label text="Patente"/>
+                  <Text text="{RouteModel>/VEHICLE/VEH_PATENT}"/>
+                  <Label text="Status"/>
+                  <ObjectStatus text="{path: 'RouteModel>/VEHICLE/VEH_STATUS', formatter: '.formatter.formatVehicleStatusToText'}" state="{path: 'RouteModel>/VEHICLE/VEH_STATUS', formatter: '.formatter.formatVehicleStatusToState'}"/>
+
+                </form:SimpleForm>
+              </uxap:blocks>
+            </uxap:ObjectPageSubSection>
+            <uxap:ObjectPageSubSection showTitle="false" title="Conductor">
+              <uxap:blocks>
+                <form:SimpleForm class="sapUxAPObjectPageSubSectionAlignContent"
+                  layout="ColumnLayout"
+                  columnsM="2"
+                  columnsL="3"
+                  columnsXL="4">
+                  <core:Title text="Informacion Conductor"/>
+
+                  <Label text="ID"/>
+                  <Text text="{RouteModel>/DRIVER/DRI_ID}"/>
+                  <Label text="Nombre"/>
+                  <Text text="{RouteModel>/DRIVER/DRI_NAME}"/>
+                  <Label text="Apellido"/>
+                  <Text text="{RouteModel>/DRIVER/DRI_LASTNAME}"/>
+                  <Label text="Email"/>
+                  <Text text="{RouteModel>/DRIVER/DRI_EMAIL}"/>
+                  <Label text="Telefono"/>
+                  <Text text="{RouteModel>/DRIVER/DRI_PHONE}"/>
+
+                </form:SimpleForm>
+              </uxap:blocks>
+            </uxap:ObjectPageSubSection>
+            <uxap:ObjectPageSubSection title="Cargamento" showTitle="false">
+              <uxap:blocks>
+                <form:SimpleForm class="sapUxAPObjectPageSubSectionAlignContent"
+                  layout="ColumnLayout"
+                  columnsM="2"
+                  columnsL="3"
+                  columnsXL="4">
+                  <core:Title text="Informacion Cargamento"/>
+
+                  <Label text="ID"/>
+                  <Text text="{RouteModel>/SHIPMENT/SHP_ID}"/>
+                  <Label text="Tipo"/>
+                  <Text text="{RouteModel>/SHIPMENT/SHP_TYPE}"/>
+                  <Label text="Material"/>
+                  <Text text="{RouteModel>/SHIPMENT/SHP_MATERIAL}"/>
+                  <Label text="Cantidad"/>
+                  <Text text="{RouteModel>/SHIPMENT/SHP_AMOUNT}"/>
+                  <Label text="Proveedor"/>
+                  <Text text="{RouteModel>/SHIPMENT/SHP_SUPPLIER}"/>
+                </form:SimpleForm>
+              </uxap:blocks>
+            </uxap:ObjectPageSubSection>
+          </uxap:subSections>
+        </uxap:ObjectPageSection>
+        <uxap:ObjectPageSection title="Map">
+          <uxap:subSections >
+            <uxap:ObjectPageSubSection title="Direcciones"  class="sapUxAPObjectPageSubSectionFitContainer">
+              
+              <VBox>
+                <form:SimpleForm class="sapUxAPObjectPageSubSectionAlignContent"
+                  layout="ResponsiveGridLayout"
+                  >
+                  <core:Title text="Informacion Origen"/>
+                  <Label text="Ciudad"/>
+                  <Text text="{RouteModel>/LOCATION_FROM/LO_CITY}"/>
+                  <Label text="Estado"/>
+                  <Text text="{RouteModel>/LOCATION_FROM/LO_STATE}"/>
+                  <Label text="Pais"/>
+                  <Text text="{RouteModel>/LOCATION_FROM/LO_COUNTRY}"/>
+                  <Label text="Latitud"/>
+                  <Text text="{RouteModel>/LOCATION_FROM/LO_LATITUDE}"/>
+                  <Label text="Longitud"/>
+                  <Text text="{RouteModel>/LOCATION_FROM/LO_LONGITUDE}"/>
+
+                  <core:Title text="Informacion Destino"/>
+                  <Label text="Ciudad"/>
+                  <Text text="{RouteModel>/LOCATION_TO/LO_CITY}"/>
+                  <Label text="Estado"/>
+                  <Text text="{RouteModel>/LOCATION_TO/LO_STATE}"/>
+                  <Label text="Pais"/>
+                  <Text text="{RouteModel>/LOCATION_TO/LO_COUNTRY}"/>
+                  <Label text="Latitud"/>
+                  <Text text="{RouteModel>/LOCATION_TO/LO_LATITUDE}"/>
+                  <Label text="Longitud"/>
+                  <Text text="{RouteModel>/LOCATION_TO/LO_LONGITUDE}"/>
+                </form:SimpleForm>
+                <HBox class="sapUiSmallMarginTop">
+                  <!-- <Input
+                    width="15rem"
+                    class="sapUiTinyMarginBottom sapUiTinyMarginEnd"
+                    id="fromInput"
+                    textFormatMode="KeyValue"
+                    placeholder="{i18n>EnterFrom}">
+                  </Input>
+                  <Input
+                    width="15rem"
+                    class="sapUiTinyMarginBottom sapUiTinyMarginEnd"
+                    id="toInput"
+                    textFormatMode="KeyValue"
+                    placeholder="{i18n>EnterTo}">
+                  </Input>
+                  <Button class="sapUiTinyMarginBottom sapUiTinyMarginEnd" text="Dibujar Ruta" press="onPressShowMap" /> -->
+                  <!-- <Input
+                    width="15rem"
+                    align="End"
+                    class="sapUiTinyMarginBottom"
+                    id="placeInput"
+                    textFormatMode="KeyValue"
+                    submit="fnSearch"
+                    placeholder="{i18n>EnterPlace}">
+                  </Input> --> <!--A estos inputs se les puede agregar sugerencias custom, Ej: estaciones YPF guardadas en BD-->
+                </HBox>
+                <HBox height="23rem" width="100%" id="id_GMapContainer" fitContainer="true" justifyContent="Center" alignItems="Center" class="sapUiNoContentPadding">
+
+                </HBox>
+              </VBox>
+            </uxap:ObjectPageSubSection>
+          </uxap:subSections>
+        </uxap:ObjectPageSection>
+    </uxap:sections>
+  </uxap:ObjectPageLayout>
+</mvc:View>

@@ -1,0 +1,90 @@
+[
+  {
+    "ROU_ID": "RU792699",
+    "ROU_STATUS": 0,
+    "ROU_DEPARTURETIME": "2021-03-02 00:43:54",
+    "ROU_ARRIVALTIME": "2021-03-02 06:43:54",
+    "ROU_DISTANCE":"400 Km",
+    "ROU_ESTIMATEDTIME": "1",
+    "LOCATION_FROM":{
+      "LO_CITY":"Mar Del Plata",
+      "LO_STATE":"Buenos Aires",
+      "LO_COUNTRY":"Argentina",
+      "LO_LATITUDE":"-38.0055873", 
+      "LO_LONGITUDE":"-57.546914"
+    },
+    "LOCATION_TO":{
+      "LO_CITY":"CABA",
+      "LO_STATE":"Buenos Aires",
+      "LO_COUNTRY":"Argentina",
+      "LO_LATITUDE":"-34.604906",
+      "LO_LONGITUDE":"-58.372063" 
+    },
+    "VEHICLE": {
+      "VEH_ID": "VE665412",
+      "VEH_BRAND": "Honda",
+      "VEH_MODEL": "Element",
+      "VEH_TYPE":"Truck",
+      "VEH_PATENT": "AE422ZD",
+      "VEH_STATUS": 0
+    },
+    "DRIVER": {
+      "DRI_NAME": "Léandre",
+      "DRI_LASTNAME": "Chesters",
+      "DRI_EMAIL": "tchesters0@google.com.hk",
+      "DRI_PHONE": "+387 (728) 227-0180",
+      "DRI_ID": "DR658156"
+    },
+    "SHIPMENT": {
+      "SHP_ID": "SH581371",
+      "SHP_MATERIAL": "Petroleo",
+      "SHP_AMOUNT": "7910 Lts",
+      "SHP_SUPPLIER": "Raynor-Larson",
+      "SHP_TYPE": "2-780 - Fuel"
+    } 
+  },
+  {
+    "ROU_ID": "RU795239",
+    "ROU_STATUS": 1,
+    "ROU_DEPARTURETIME": "2021-03-02 00:43:54",
+    "ROU_ARRIVALTIME": "2021-04-02 06:43:54",
+    "ROU_DISTANCE":"1106 Km",
+    "ROU_ESTIMATEDTIME": "2",
+    "LOCATION_FROM":{
+      "LO_CITY":"Mar Del Plata",
+      "LO_STATE":"Buenos Aires",
+      "LO_COUNTRY":"Argentina",
+      "LO_LATITUDE":"-38.00558", 
+      "LO_LONGITUDE":"-57.54691"
+    },
+    "LOCATION_TO":{
+      "LO_CITY":"Cordoba",
+      "LO_STATE":"Cordoba",
+      "LO_COUNTRY":"Argentina",
+      "LO_LATITUDE":"-31.264700", 
+      "LO_LONGITUDE":"-64.230688" 
+    },
+    "VEHICLE": {
+      "VEH_ID": "VE665223",
+      "VEH_BRAND": "Mercedes Benz",
+      "VEH_MODEL": "AXOR 233",
+      "VEH_TYPE":"Truck",
+      "VEH_PATENT": "AE422ZD",
+      "VEH_STATUS": 0
+    },
+    "DRIVER": {
+      "DRI_NAME": "Léandre",
+      "DRI_LASTNAME": "Chesters",
+      "DRI_EMAIL": "tchesters0@google.com.hk",
+      "DRI_PHONE": "+387 (728) 227-0180",
+      "DRI_ID": "DR658156"
+    },
+    "SHIPMENT": {
+      "SHP_ID": "SH581371",
+      "SHP_MATERIAL": "Aluminium",
+      "SHP_AMOUNT": "7910 Lts",
+      "SHP_SUPPLIER": "Raynor-Larson",
+      "SHP_TYPE": "2-782 - Construction Materials"
+    } 
+  }
+]
