@@ -73,6 +73,11 @@
 						class="sapMObjectStatusLarge" />
         </VBox>
         <VBox class="sapUiLargeMarginEnd sapUiSmallMarginBottom">
+					<Title text="Tiempo de Entrega" class="sapUiTinyMarginBottom" />
+					<ObjectStatus  text="{RouteModel>/ROU_ESTIMATEDTIME} Dias"
+						class="sapMObjectStatusLarge" />
+        </VBox>
+        <VBox class="sapUiLargeMarginEnd sapUiSmallMarginBottom">
           <Title text="Desde" class="sapUiTinyMarginBottom"/>
           <ObjectStatus text="{parts: ['RouteModel>/LOCATION_FROM/LO_COUNTRY', 'RouteModel>/LOCATION_FROM/LO_CITY']}" 	class="sapMObjectStatusLarge"/>
         </VBox>
@@ -163,8 +168,17 @@
               
               <VBox>
                 <form:SimpleForm class="sapUxAPObjectPageSubSectionAlignContent"
-                  layout="ResponsiveGridLayout"
+                  layout="ResponsiveGridLayout" labelSpanL="4" labelSpanM="2" emptySpanL="0" emptySpanM="0"
+                  columnsL="3" columnsM="4" 
                   >
+                  <core:Title text="Informacion Ruta"/>
+                  <Label text="Salida"/>
+                  <Text text="{RouteModel>/ROU_DEPARTURETIME}"/>
+                  <Label text="Distancia"/>
+                  <Text text="{RouteModel>/ROU_DISTANCE}"/>
+                  <Label text="Tiempo estimado"/>
+                  <Text text="{RouteModel>/ROU_ESTIMATEDTIME} Dias"/>
+
                   <core:Title text="Informacion Origen"/>
                   <Label text="Ciudad"/>
                   <Text text="{RouteModel>/LOCATION_FROM/LO_CITY}"/>
@@ -215,7 +229,7 @@
                     placeholder="{i18n>EnterPlace}">
                   </Input> --> <!--A estos inputs se les puede agregar sugerencias custom, Ej: estaciones YPF guardadas en BD-->
                 </HBox>
-                <HBox height="23rem" width="100%" id="id_GMapContainer" fitContainer="true" justifyContent="Center" alignItems="Center" class="sapUiNoContentPadding">
+                <HBox height="23rem" width="82%" id="id_GMapContainer" fitContainer="true" justifyContent="Center" alignItems="Center" class="sapUiNoContentPadding">
 
                 </HBox>
               </VBox>

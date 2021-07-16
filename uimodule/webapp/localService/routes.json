@@ -5,7 +5,7 @@
     "ROU_DEPARTURETIME": "2021-03-02 00:43:54",
     "ROU_ARRIVALTIME": "2021-03-02 06:43:54",
     "ROU_DISTANCE":"400 Km",
-    "ROU_ESTIMATEDTIME": "1",
+    "ROU_ESTIMATEDTIME": "2",
     "LOCATION_FROM":{
       "LO_CITY":"Mar Del Plata",
       "LO_STATE":"Buenos Aires",
@@ -24,7 +24,7 @@
       "VEH_ID": "VE665412",
       "VEH_BRAND": "Honda",
       "VEH_MODEL": "Element",
-      "VEH_TYPE":"Truck",
+      "VEH_TYPE":"Camion",
       "VEH_PATENT": "AE422ZD",
       "VEH_STATUS": 0
     },
@@ -49,7 +49,7 @@
     "ROU_DEPARTURETIME": "2021-03-02 00:43:54",
     "ROU_ARRIVALTIME": "2021-04-02 06:43:54",
     "ROU_DISTANCE":"1106 Km",
-    "ROU_ESTIMATEDTIME": "2",
+    "ROU_ESTIMATEDTIME": "3",
     "LOCATION_FROM":{
       "LO_CITY":"Mar Del Plata",
       "LO_STATE":"Buenos Aires",
@@ -68,7 +68,7 @@
       "VEH_ID": "VE665223",
       "VEH_BRAND": "Mercedes Benz",
       "VEH_MODEL": "AXOR 233",
-      "VEH_TYPE":"Truck",
+      "VEH_TYPE":"Camion",
       "VEH_PATENT": "AE422ZD",
       "VEH_STATUS": 0
     },

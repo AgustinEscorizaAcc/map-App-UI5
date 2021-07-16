@@ -12,6 +12,9 @@ sap.ui.define(
     return Controller.extend("com.YPF.mapApp.controller.RouteDetail", {
       onInit: function () {
         this.loadRouteModel();
+        this.directionsRenderer = null;
+        var oRouter = this.getRouter();
+			  oRouter.getRoute(Constants.targets.ROUTE_DETAIL).attachMatched(this._onRouteMatched, this);
         this.vDataCheck = false;
         this.vGLat = null;
         this.vGLang = null;
@@ -20,6 +23,12 @@ sap.ui.define(
         // this.getGDATA(); si se pudiera cargar un JSON con ajax aca puedo traer markers guardados, y guardarlos cuando se crean
         let oGoogleModel = new JSONModel([]);
         this.getView().setModel(oGoogleModel, "GDATA");
+      },
+      _onRouteMatched: function(){
+        this.loadRouteModel();
+        let oFrom = this.getView().getModel(Constants.paths.ROUTE_PATH).getProperty("/LOCATION_FROM");
+        let oTo = this.getView().getModel(Constants.paths.ROUTE_PATH).getProperty("/LOCATION_TO");
+        this.showRoute(oFrom.LO_CITY.concat(oFrom.LO_STATE),oTo.LO_CITY.concat(oTo.LO_STATE));
       },
       loadRouteModel: function(){
         let oModelRoute = this.getOwnerComponent().getModel(
@@ -60,10 +69,14 @@ sap.ui.define(
           }, 1000);
         }
       },
-      showRoute: function(oOrigin,oDestination){
-        var directionsRenderer = new google.maps.DirectionsRenderer({
-          map: this.map
-        });
+      showRoute: function(oOrigin, oDestination){
+        let that = this;
+        if (this.directionsRenderer != null){
+          this.directionsRenderer.setMap(null);
+          this.directionsRenderer = null;
+        }
+        this.directionsRenderer = new google.maps.DirectionsRenderer();
+        this.directionsRenderer.setMap(this.map);
         var directionsService = new google.maps.DirectionsService;
         var req = {
           origin: oOrigin,
@@ -72,7 +85,7 @@ sap.ui.define(
         };
         directionsService.route(req, function(response, status) {
           if (status === 'OK') {
-            directionsRenderer.setDirections(response);
+            that.directionsRenderer.setDirections(response);
           } else {
             MessageToast.show( "Esa ruta no es posible");
           }
