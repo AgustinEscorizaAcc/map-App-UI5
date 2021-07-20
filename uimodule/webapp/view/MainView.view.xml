@@ -9,7 +9,7 @@
         <pages>
             <f:DynamicPage 
                 id="dynamicPageId"
-                headerExpanded="false" class="sapUiResponsiveContentPadding">
+                headerExpanded="false" class="sapUiNoContentPadding">
                 <f:title>
                 <f:DynamicPageTitle>
                     <f:heading>
@@ -28,7 +28,7 @@
 
                     </f:content>
                     <f:actions>
-                        <Button text="Crear" type="Emphasized" />
+                        <Button text="Crear" type="Emphasized" press="onPressCreate"/>
                         <Button icon="sap-icon://action" type="Transparent"/>
                     </f:actions>
                     <f:navigationActions>
@@ -65,7 +65,7 @@
                                             </FacetFilterList>
                                 </FacetFilter> -->
                                 <ToolbarSpacer/>
-                                <SearchField width="20%" placeholder="Buscar por codigo" class="sapUiSmallMargin" liveChange="onFilterDrivers"/>
+                                <SearchField width="20%" placeholder="Buscar por codigo" class="sapUiSmallMargin" liveChange="onFilterRoutes"/>
                                 <!-- <Select
                                     class="sapUiSmallMargin"
                                     forceSelection="true"
@@ -76,13 +76,13 @@
                                 <Button
                                     tooltip="Sort"
                                     icon="sap-icon://sort"
-                                    press="onSortDriversButtonPressed"
+                                    press="onSortRoutesButtonPressed"
                                     ariaHasPopup="Dialog"/>
-                                <Button icon="sap-icon://action-settings" press="onPersoButtonPressedDri" >
+                                <!-- <Button icon="sap-icon://action-settings" press="onPersoButtonPressedDri" >
                                     <layoutData>
                                         <OverflowToolbarLayoutData priority="NeverOverflow" />
                                     </layoutData>
-                                </Button>
+                                </Button> -->
                             </OverflowToolbar>
                         </headerToolbar>
                     </Table>

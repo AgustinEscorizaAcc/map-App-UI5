@@ -4,9 +4,10 @@ sap.ui.define(
     "sap/ui/model/json/JSONModel",
     "sap/base/util/uid",
     "com/YPF/mapApp/model/Constants",
-    "sap/ui/core/Fragment"
+    "sap/ui/core/Fragment",
+    "sap/uxap/BlockBase"
   ],
-  function (Controller, MessageToast, JSONModel, uid, Constants, Fragment) {
+  function (Controller, MessageToast, JSONModel, uid, Constants, Fragment, BlockBase) {
     "use strict";
 
     return Controller.extend("com.YPF.mapApp.controller.RouteDetail", {
@@ -23,6 +24,12 @@ sap.ui.define(
         // this.getGDATA(); si se pudiera cargar un JSON con ajax aca puedo traer markers guardados, y guardarlos cuando se crean
         let oGoogleModel = new JSONModel([]);
         this.getView().setModel(oGoogleModel, "GDATA");
+        var BlockPanel = BlockBase.extend("sap.uxap.sample.ObjectPageSubSectionSized.blocks.BlockPanel", {
+          metadata: {
+              /* no additional views provided */
+          }
+      });
+      return BlockPanel;
       },
       _onRouteMatched: function(){
         this.loadRouteModel();

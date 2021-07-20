@@ -3,6 +3,8 @@
   xmlns="sap.m"
   xmlns:core="sap.ui.core"
   xmlns:uxap="sap.uxap"
+  xmlns:f="sap.f"
+  xmlns:card="sap.f.cards"
   xmlns:mvc="sap.ui.core.mvc"
   xmlns:form="sap.ui.layout.form">
   <uxap:ObjectPageLayout
@@ -90,120 +92,190 @@
     <uxap:sections>
         <uxap:ObjectPageSection showTitle="false" title="Info Transporte">
           <uxap:subSections >
-            <uxap:ObjectPageSubSection title="Vehiculo" showTitle="false">
-              <uxap:blocks>
-                <form:SimpleForm class="sapUxAPObjectPageSubSectionAlignContent"
-                  layout="ColumnLayout"
-                  columnsM="2"
-                  columnsL="3"
-                  columnsXL="4">
-                  <core:Title text="Informacion Vehiculo"/>
-
-                  <Label text="ID"/>
-                  <Text text="{RouteModel>/VEHICLE/VEH_ID}"/>
-                  <Label text="Marca"/>
-                  <Text text="{RouteModel>/VEHICLE/VEH_BRAND}"/>
-                  <Label text="Modelo"/>
-                  <Text text="{RouteModel>/VEHICLE/VEH_MODEL}"/>
-                  <Label text="Tipo"/>
-                  <Text text="{RouteModel>/VEHICLE/VEH_TYPE}"/>
-                  <Label text="Patente"/>
-                  <Text text="{RouteModel>/VEHICLE/VEH_PATENT}"/>
-                  <Label text="Status"/>
-                  <ObjectStatus text="{path: 'RouteModel>/VEHICLE/VEH_STATUS', formatter: '.formatter.formatVehicleStatusToText'}" state="{path: 'RouteModel>/VEHICLE/VEH_STATUS', formatter: '.formatter.formatVehicleStatusToState'}"/>
-
-                </form:SimpleForm>
-              </uxap:blocks>
-            </uxap:ObjectPageSubSection>
-            <uxap:ObjectPageSubSection showTitle="false" title="Conductor">
-              <uxap:blocks>
-                <form:SimpleForm class="sapUxAPObjectPageSubSectionAlignContent"
-                  layout="ColumnLayout"
-                  columnsM="2"
-                  columnsL="3"
-                  columnsXL="4">
-                  <core:Title text="Informacion Conductor"/>
-
-                  <Label text="ID"/>
-                  <Text text="{RouteModel>/DRIVER/DRI_ID}"/>
-                  <Label text="Nombre"/>
-                  <Text text="{RouteModel>/DRIVER/DRI_NAME}"/>
-                  <Label text="Apellido"/>
-                  <Text text="{RouteModel>/DRIVER/DRI_LASTNAME}"/>
-                  <Label text="Email"/>
-                  <Text text="{RouteModel>/DRIVER/DRI_EMAIL}"/>
-                  <Label text="Telefono"/>
-                  <Text text="{RouteModel>/DRIVER/DRI_PHONE}"/>
-
-                </form:SimpleForm>
-              </uxap:blocks>
-            </uxap:ObjectPageSubSection>
-            <uxap:ObjectPageSubSection title="Cargamento" showTitle="false">
-              <uxap:blocks>
-                <form:SimpleForm class="sapUxAPObjectPageSubSectionAlignContent"
-                  layout="ColumnLayout"
-                  columnsM="2"
-                  columnsL="3"
-                  columnsXL="4">
-                  <core:Title text="Informacion Cargamento"/>
-
-                  <Label text="ID"/>
-                  <Text text="{RouteModel>/SHIPMENT/SHP_ID}"/>
-                  <Label text="Tipo"/>
-                  <Text text="{RouteModel>/SHIPMENT/SHP_TYPE}"/>
-                  <Label text="Material"/>
-                  <Text text="{RouteModel>/SHIPMENT/SHP_MATERIAL}"/>
-                  <Label text="Cantidad"/>
-                  <Text text="{RouteModel>/SHIPMENT/SHP_AMOUNT}"/>
-                  <Label text="Proveedor"/>
-                  <Text text="{RouteModel>/SHIPMENT/SHP_SUPPLIER}"/>
-                </form:SimpleForm>
-              </uxap:blocks>
+            <uxap:ObjectPageSubSection title="Informacion de Transporte">
+              <!-- <HBox>
+                <HBox class="sapUiSmallMargin"> -->
+                <f:Card class="sapUiSmallMargin">
+                  <f:header>
+                      <card:Header iconSrc="sap-icon://car-rental" title="Datos de vehiculo" />
+                  </f:header>
+                  <f:content>
+                      <HBox alignItems="Center" justifyContent="SpaceBetween" width="90%">
+                        <VBox>
+                          <HBox class="sapUiSmallMarginBegin sapUiSmallMarginTopBottom" justifyContent="SpaceBetween">
+                            <Label text="ID:"/>
+                            <ObjectStatus text="{RouteModel>/VEHICLE/VEH_ID}" class="sapMObjectStatusMedium sapUiLargeMarginBegin" />
+                          </HBox>
+                          <HBox class="sapUiSmallMarginBegin sapUiSmallMarginTopBottom" justifyContent="SpaceBetween">
+                            <Label text="Marca:"/>
+                            <ObjectStatus text="{RouteModel>/VEHICLE/VEH_BRAND}" class="sapMObjectStatusMedium sapUiLargeMarginBegin" />
+                          </HBox>
+                          <HBox class="sapUiSmallMarginBegin sapUiSmallMarginTopBottom" justifyContent="SpaceBetween">
+                            <Label text="Modelo:"/>
+                            <ObjectStatus text="{RouteModel>/VEHICLE/VEH_MODEL}" class="sapMObjectStatusMedium sapUiLargeMarginBegin" />
+                          </HBox>
+                        </VBox>
+                        <VBox>
+                          <HBox class="sapUiSmallMarginBegin sapUiSmallMarginTopBottom" justifyContent="SpaceBetween">
+                            <Label text="Tipo:"/>
+                            <ObjectStatus text="{RouteModel>/VEHICLE/VEH_TYPE}" class="sapMObjectStatusMedium sapUiLargeMarginBegin" />
+                          </HBox>
+                          <HBox class="sapUiSmallMarginBegin sapUiSmallMarginTopBottom" justifyContent="SpaceBetween">
+                            <Label text="Patente:"/>
+                            <ObjectStatus text="{RouteModel>/VEHICLE/VEH_PATENT}" class="sapMObjectStatusMedium sapUiLargeMarginBegin" />
+                          </HBox>
+                          <HBox class="sapUiSmallMarginBegin sapUiSmallMarginTopBottom" justifyContent="SpaceBetween">
+                            <Label text="Status:"/>
+                            <ObjectStatus text="{path: 'RouteModel>/VEHICLE/VEH_STATUS', formatter: '.formatter.formatVehicleStatusToText'}" state="{path: 'RouteModel>/VEHICLE/VEH_STATUS', formatter: '.formatter.formatVehicleStatusToState'}" class="sapMObjectStatusMedium sapUiLargeMarginBegin"/>
+                          </HBox>
+                        </VBox>
+                      </HBox>
+                  </f:content>
+                </f:Card>
+                <!-- </HBox>
+                <HBox class="sapUiSmallMargin"> -->
+                <f:Card class="sapUiSmallMargin">
+                  <f:header>
+                      <card:Header iconSrc="sap-icon://employee" title="Datos de Conductor" />
+                  </f:header>
+                  <f:content>
+                        <VBox width="90%">
+                          <HBox class="sapUiSmallMarginBegin sapUiSmallMarginTopBottom" justifyContent="SpaceBetween">
+                            <Label text="ID:"/>
+                            <ObjectStatus text="{RouteModel>/DRIVER/DRI_ID}" class="sapMObjectStatusMedium sapUiLargeMarginBegin" />
+                          </HBox>
+                          <HBox class="sapUiSmallMarginBegin sapUiSmallMarginTopBottom" justifyContent="SpaceBetween">
+                            <Label text="Nombre:"/>
+                            <ObjectStatus text="{RouteModel>/DRIVER/DRI_NAME}" class="sapMObjectStatusMedium sapUiLargeMarginBegin" />
+                          </HBox>
+                          <HBox class="sapUiSmallMarginBegin sapUiSmallMarginTopBottom" justifyContent="SpaceBetween">
+                            <Label text="Apellido:"/>
+                            <ObjectStatus text="{RouteModel>/DRIVER/DRI_LASTNAME}" class="sapMObjectStatusMedium sapUiLargeMarginBegin" />
+                          </HBox>
+                          <HBox class="sapUiSmallMarginBegin sapUiSmallMarginTopBottom" justifyContent="SpaceBetween">
+                            <Label text="Email:"/>
+                            <ObjectStatus text="{RouteModel>/DRIVER/DRI_EMAIL}" class="sapMObjectStatusMedium sapUiLargeMarginBegin" />
+                          </HBox>
+                          <HBox class="sapUiSmallMarginBegin sapUiSmallMarginTopBottom" justifyContent="SpaceBetween">
+                            <Label text="Telefono:"/>
+                            <ObjectStatus text="{RouteModel>/DRIVER/DRI_PHONE}" class="sapMObjectStatusMedium sapUiLargeMarginBegin" />
+                          </HBox>
+                        </VBox>
+                  </f:content>
+                </f:Card>
+                <!-- </HBox>
+                <HBox class="sapUiSmallMargin"> -->
+                <f:Card class="sapUiSmallMargin">
+                  <f:header>
+                      <card:Header iconSrc="sap-icon://inventory" title="Datos de Cargamento" />
+                  </f:header>
+                  <f:content>
+                      <VBox width="90%">
+                          <HBox class="sapUiSmallMarginBegin sapUiSmallMarginTopBottom" justifyContent="SpaceBetween">
+                            <Label text="ID:"/>
+                            <ObjectStatus text="{RouteModel>/SHIPMENT/SHP_ID}" class="sapMObjectStatusMedium sapUiLargeMarginBegin" />
+                          </HBox>
+                          <HBox class="sapUiSmallMarginBegin sapUiSmallMarginTopBottom" justifyContent="SpaceBetween">
+                            <Label text="Tipo:"/>
+                            <ObjectStatus text="{RouteModel>/SHIPMENT/SHP_TYPE}" class="sapMObjectStatusMedium sapUiLargeMarginBegin" />
+                          </HBox>
+                          <HBox class="sapUiSmallMarginBegin sapUiSmallMarginTopBottom" justifyContent="SpaceBetween">
+                            <Label text="Material:"/>
+                            <ObjectStatus text="{RouteModel>/SHIPMENT/SHP_MATERIAL}" class="sapMObjectStatusMedium sapUiLargeMarginBegin" />
+                          </HBox>
+                          <HBox class="sapUiSmallMarginBegin sapUiSmallMarginTopBottom" justifyContent="SpaceBetween">
+                            <Label text="Cantidad:"/>
+                            <ObjectStatus text="{RouteModel>/SHIPMENT/SHP_AMOUNT}" class="sapMObjectStatusMedium sapUiLargeMarginBegin" />
+                          </HBox>
+                          <HBox class="sapUiSmallMarginBegin sapUiSmallMarginTopBottom" justifyContent="SpaceBetween">
+                            <Label text="Proveedor:"/>
+                            <ObjectStatus text="{RouteModel>/SHIPMENT/SHP_SUPPLIER}" class="sapMObjectStatusMedium sapUiLargeMarginBegin" />
+                          </HBox>
+                        </VBox>
+                  </f:content>
+                </f:Card>
+                <!-- </HBox>
+              </HBox> -->
             </uxap:ObjectPageSubSection>
           </uxap:subSections>
         </uxap:ObjectPageSection>
-        <uxap:ObjectPageSection title="Map">
+        <uxap:ObjectPageSection title="Map" >
           <uxap:subSections >
-            <uxap:ObjectPageSubSection title="Direcciones"  class="sapUxAPObjectPageSubSectionFitContainer">
-              
-              <VBox>
-                <form:SimpleForm class="sapUxAPObjectPageSubSectionAlignContent"
-                  layout="ResponsiveGridLayout" labelSpanL="4" labelSpanM="2" emptySpanL="0" emptySpanM="0"
-                  columnsL="3" columnsM="4" 
-                  >
-                  <core:Title text="Informacion Ruta"/>
-                  <Label text="Salida"/>
-                  <Text text="{RouteModel>/ROU_DEPARTURETIME}"/>
-                  <Label text="Distancia"/>
-                  <Text text="{RouteModel>/ROU_DISTANCE}"/>
-                  <Label text="Tiempo estimado"/>
-                  <Text text="{RouteModel>/ROU_ESTIMATEDTIME} Dias"/>
+            <uxap:ObjectPageSubSection title="Direcciones" >
+              <!-- <HBox>
+                <HBox width="40%" justifyContent="SpaceAround"> -->
+                <uxap:blocks>
+                  <f:Card class="sapUxAPObjectPageSubSectionAlignContent" >
+                    <f:header >
+                        <card:Header title="Info Origen"/>
+                    </f:header>
+                    <f:content>
+                        <VBox width="95%">
+                          <HBox class="sapUiSmallMarginBegin sapUiSmallMarginTopBottom" justifyContent="SpaceBetween">
+                            <Label text="Ciudad"/>
+                            <ObjectStatus text="{RouteModel>/LOCATION_FROM/LO_CITY}" class="sapMObjectStatusMedium sapUiLargeMarginBegin" />
+                          </HBox>
+                          <HBox class="sapUiSmallMarginBegin sapUiSmallMarginTopBottom" justifyContent="SpaceBetween">
+                            <Label text="Estado"/>
+                            <ObjectStatus text="{RouteModel>/LOCATION_FROM/LO_STATE}" class="sapMObjectStatusMedium sapUiLargeMarginBegin" />
+                          </HBox>
+                          <HBox class="sapUiSmallMarginBegin sapUiSmallMarginTopBottom" justifyContent="SpaceBetween">
+                            <Label text="Pais"/>
+                            <ObjectStatus text="{RouteModel>/LOCATION_FROM/LO_COUNTRY}" class="sapMObjectStatusMedium sapUiLargeMarginBegin" />
+                          </HBox>
+                          <HBox class="sapUiSmallMarginBegin sapUiSmallMarginTopBottom" justifyContent="SpaceBetween">
+                            <Label text="Latitud"/>
+                            <ObjectStatus text="{RouteModel>/LOCATION_FROM/LO_LATITUDE}" class="sapMObjectStatusMedium sapUiLargeMarginBegin" />
+                          </HBox>
+                          <HBox class="sapUiSmallMarginBegin sapUiSmallMarginTopBottom" justifyContent="SpaceBetween">
+                            <Label text="Longitud"/>
+                            <ObjectStatus text="{RouteModel>/LOCATION_FROM/LO_LONGITUDE}" class="sapMObjectStatusMedium sapUiLargeMarginBegin" />
+                          </HBox>
+                        </VBox>
+                    </f:content>
+                  </f:Card>
+                  <f:Card class="sapUxAPObjectPageSubSectionAlignContent">
+                    <f:header>
+                        <card:Header title="Info Destino" />
+                    </f:header>
+                    <f:content>
+                        <VBox width="95%">
+                          <HBox class="sapUiSmallMarginBegin sapUiSmallMarginTopBottom" justifyContent="SpaceBetween">
+                            <Label text="Ciudad"/>
+                            <ObjectStatus text="{RouteModel>/LOCATION_TO/LO_CITY}" class="sapMObjectStatusMedium sapUiLargeMarginBegin" />
+                          </HBox>
+                          <HBox class="sapUiSmallMarginBegin sapUiSmallMarginTopBottom" justifyContent="SpaceBetween">
+                            <Label text="Estado"/>
+                            <ObjectStatus text="{RouteModel>/LOCATION_TO/LO_STATE}" class="sapMObjectStatusMedium sapUiLargeMarginBegin" />
+                          </HBox>
+                          <HBox class="sapUiSmallMarginBegin sapUiSmallMarginTopBottom" justifyContent="SpaceBetween">
+                            <Label text="Pais"/>
+                            <ObjectStatus text="{RouteModel>/LOCATION_TO/LO_COUNTRY}" class="sapMObjectStatusMedium sapUiLargeMarginBegin" />
+                          </HBox>
+                          <HBox class="sapUiSmallMarginBegin sapUiSmallMarginTopBottom" justifyContent="SpaceBetween">
+                            <Label text="Latitud"/>
+                            <ObjectStatus text="{RouteModel>/LOCATION_TO/LO_LATITUDE}" class="sapMObjectStatusMedium sapUiLargeMarginBegin" />
+                          </HBox>
+                          <HBox class="sapUiSmallMarginBegin sapUiSmallMarginTopBottom" justifyContent="SpaceBetween">
+                            <Label text="Longitud"/>
+                            <ObjectStatus text="{RouteModel>/LOCATION_TO/LO_LONGITUDE}" class="sapMObjectStatusMedium sapUiLargeMarginBegin" />
+                          </HBox>
+                        </VBox>
+                    </f:content>
+                  </f:Card>
+                  <!-- </HBox> -->
+                  <f:Card class="sapUxAPObjectPageSubSectionAlignContent">
+                    <f:header>
+                        <card:Header title="Info Ruta" subtitle="Salida: {RouteModel>/ROU_DEPARTURETIME} | Distancia: {RouteModel>/ROU_DISTANCE} | Tiempo estimado: {RouteModel>/ROU_ESTIMATEDTIME} Dias" />
+                    </f:header>
+                    <f:content>
+                      <HBox height="25rem" width="100%" id="id_GMapContainer" fitContainer="true" justifyContent="Center" alignItems="Center" class="sapUiNoContentPadding">
 
-                  <core:Title text="Informacion Origen"/>
-                  <Label text="Ciudad"/>
-                  <Text text="{RouteModel>/LOCATION_FROM/LO_CITY}"/>
-                  <Label text="Estado"/>
-                  <Text text="{RouteModel>/LOCATION_FROM/LO_STATE}"/>
-                  <Label text="Pais"/>
-                  <Text text="{RouteModel>/LOCATION_FROM/LO_COUNTRY}"/>
-                  <Label text="Latitud"/>
-                  <Text text="{RouteModel>/LOCATION_FROM/LO_LATITUDE}"/>
-                  <Label text="Longitud"/>
-                  <Text text="{RouteModel>/LOCATION_FROM/LO_LONGITUDE}"/>
-
-                  <core:Title text="Informacion Destino"/>
-                  <Label text="Ciudad"/>
-                  <Text text="{RouteModel>/LOCATION_TO/LO_CITY}"/>
-                  <Label text="Estado"/>
-                  <Text text="{RouteModel>/LOCATION_TO/LO_STATE}"/>
-                  <Label text="Pais"/>
-                  <Text text="{RouteModel>/LOCATION_TO/LO_COUNTRY}"/>
-                  <Label text="Latitud"/>
-                  <Text text="{RouteModel>/LOCATION_TO/LO_LATITUDE}"/>
-                  <Label text="Longitud"/>
-                  <Text text="{RouteModel>/LOCATION_TO/LO_LONGITUDE}"/>
-                </form:SimpleForm>
-                <HBox class="sapUiSmallMarginTop">
+                      </HBox>
+                    </f:content>
+                  </f:Card>
+                </uxap:blocks>
+                <!-- <HBox class="sapUiSmallMarginTop"> -->
                   <!-- <Input
                     width="15rem"
                     class="sapUiTinyMarginBottom sapUiTinyMarginEnd"
@@ -221,18 +293,16 @@
                   <Button class="sapUiTinyMarginBottom sapUiTinyMarginEnd" text="Dibujar Ruta" press="onPressShowMap" /> -->
                   <!-- <Input
                     width="15rem"
-                    align="End"
+                    
                     class="sapUiTinyMarginBottom"
                     id="placeInput"
                     textFormatMode="KeyValue"
                     submit="fnSearch"
                     placeholder="{i18n>EnterPlace}">
                   </Input> --> <!--A estos inputs se les puede agregar sugerencias custom, Ej: estaciones YPF guardadas en BD-->
-                </HBox>
-                <HBox height="23rem" width="82%" id="id_GMapContainer" fitContainer="true" justifyContent="Center" alignItems="Center" class="sapUiNoContentPadding">
-
-                </HBox>
-              </VBox>
+                <!-- </HBox> -->
+               
+              <!-- </HBox> -->
             </uxap:ObjectPageSubSection>
           </uxap:subSections>
         </uxap:ObjectPageSection>
