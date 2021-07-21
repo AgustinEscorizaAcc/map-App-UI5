@@ -26,7 +26,7 @@
       "VEH_MODEL": "Element",
       "VEH_TYPE":"Camion",
       "VEH_PATENT": "AE422ZD",
-      "VEH_STATUS": 0
+      "VEH_STATUS": 1
     },
     "DRIVER": {
       "DRI_NAME": "Léandre",
@@ -70,7 +70,7 @@
       "VEH_MODEL": "AXOR 233",
       "VEH_TYPE":"Camion",
       "VEH_PATENT": "AE422ZD",
-      "VEH_STATUS": 0
+      "VEH_STATUS": 1
     },
     "DRIVER": {
       "DRI_NAME": "Léandre",
