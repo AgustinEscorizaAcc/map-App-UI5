@@ -39,7 +39,7 @@
 				</uxap:snappedTitleOnMobile>
         <uxap:actions>
           <uxap:ObjectPageHeaderActionButton icon="sap-icon://nav-back" type="Transparent" press="onNavBack" tooltip="{i18n>routeDetailBtnBack}"/>
-					<Button text="Editar" type="Emphasized" />
+					<Button text="Editar" type="Emphasized" press="onNavToEdit"/>
         </uxap:actions>
       </uxap:ObjectPageDynamicHeaderTitle>
     </uxap:headerTitle>
@@ -112,7 +112,7 @@
                   <ObjectStatus text="{RouteModel>/VEHICLE/VEH_PATENT}"/>
                   <Label text="Status" />
                   <ObjectStatus text="{path: 'RouteModel>/VEHICLE/VEH_STATUS', formatter: '.formatter.formatVehicleStatusToText'}" state="{path: 'RouteModel>/VEHICLE/VEH_STATUS', formatter: '.formatter.formatVehicleStatusToState'}"/>
-                  <core:Title text="Vehiculo"/>
+                  <core:Title text="Conductor"/>
                   <Label text="ID" />
                   <ObjectStatus text="{RouteModel>/DRIVER/DRI_ID}" />
                   <Label text="Nombre" />

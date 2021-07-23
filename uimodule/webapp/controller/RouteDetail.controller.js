@@ -43,6 +43,18 @@ sap.ui.define(
         );
         this.getView().setModel(oModelRoute, Constants.paths.ROUTE_PATH);
       },
+      onNavToEdit: function(){
+        let oModel = this.getView().getModel("RouteModel");
+        let oRoute = {
+          Origen: oModel.getData().LOCATION_FROM.LO_CITY,
+          Destination: oModel.getData().LOCATION_TO.LO_CITY
+        };
+        let oRouteModel = new JSONModel();
+        oRouteModel.setData(oRoute);
+        this.getOwnerComponent().setModel(oModel, "addRouteModel");
+        this.getOwnerComponent().setModel(oRouteModel, "inputRoute");
+        this.navTo(Constants.targets.CREATE_ROUTE);
+      },
       onAfterRendering: function (){
         let that = this;
         this.vDataCheck = false;

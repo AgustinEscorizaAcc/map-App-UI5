@@ -64,22 +64,32 @@
                     <WizardStep id="routeVehicleStep"
 								title="Route Vehicle"
 								validated="true"
-								activate="productTypeActivate">
+								activate="routeVehicleValidation">
 						<MessageStrip class="sapUiSmallMarginBottom"
 							text="Informacion del vehiculo que va a realizar el transporte"
 							showIcon="true"/>
 						<form:SimpleForm
 								editable="true">
-							<Label text="ID Vehiculo" />
-							<Input value="{newRouteModel>/VEHICLE/VEH_ID}" width="20rem" id="VEH_ID" placeholder="Ingresar ID"/>
+							<Label text="ID Vehiculo" required="true" />
+							<Input value="{addRouteModel>/VEHICLE/VEH_ID}" valueStateText="No puede estar vacio" valueState="{/vehicleIdState}" liveChange="validateVehicleId" width="20rem" id="VEH_ID" placeholder="Ingresar ID"/>
 							<Label text="Marca" />
-							<Input value="{newRouteModel>/VEHICLE/VEH_BRAND}" width="20rem" id="VEH_BRAND" placeholder="Ingresar Marca"/>
+							<Input value="{addRouteModel>/VEHICLE/VEH_BRAND}" width="20rem" id="VEH_BRAND" placeholder="Ingresar Marca"/>
 							<Label text="Modelo" />
-							<Input value="{newRouteModel>/VEHICLE/VEH_MODEL}" width="20rem" id="VEH_MODEL" placeholder="Ingresar Modelo"/>
-							<Label text="Tipo" />
-							<Input value="{newRouteModel>/VEHICLE/VEH_TYPE}" width="20rem" id="VEH_TYPE" placeholder="Ingresar Tipo"/>
-							<Label text="Patente" />
-							<Input value="{newRouteModel>/VEHICLE/VEH_PATENT}" width="20rem" id="VEH_PATENT" placeholder="Ingresar Patente"/>
+							<Input value="{addRouteModel>/VEHICLE/VEH_MODEL}" width="20rem" id="VEH_MODEL" placeholder="Ingresar Modelo"/>
+							<Label text="Patente" required="true"/>
+							<Input value="{addRouteModel>/VEHICLE/VEH_PATENT}" valueStateText="Mas de 5 caracteres" valueState="{/vehiclePatentState}" liveChange="validateVehiclePatent" width="20rem" id="VEH_PATENT" placeholder="Ingresar Patente"/>
+							<Label text="Tipo"/>
+							<SegmentedButton selectionChange="" width="20rem" id="selectedVehicleType"
+													 selectedKey="{addRouteModel>/VEHICLE/VEH_TYPE}" >
+										<items>
+											<SegmentedButtonItem key="Camion"
+																text="Camion" class="sapUiTinyMargin"/>
+											<SegmentedButtonItem key="Camioneta"  class="sapUiTinyMargin"
+																text="Camioneta"/>
+											<SegmentedButtonItem key="Otro" class="sapUiTinyMargin"
+																text="Otro"/>
+										</items>
+							</SegmentedButton>
 						</form:SimpleForm>
 					</WizardStep>
                     <WizardStep id="carrierStep"
@@ -92,15 +102,15 @@
 						<form:SimpleForm
 								editable="true">
 							<Label text="Conductor ID" />
-							<Input value="{newRouteModel>/DRIVER/DRI_ID}" width="20rem" id="DRI_ID" placeholder="Ingresar ID"/>
+							<Input value="{addRouteModel>/DRIVER/DRI_ID}" width="20rem" id="DRI_ID" placeholder="Ingresar ID"/>
 							<Label text="Nombre" />
-							<Input value="{newRouteModel>/DRIVER/DRI_NAME}" width="20rem" id="DRI_NAME" placeholder="Ingresar Nombre"/>
+							<Input value="{addRouteModel>/DRIVER/DRI_NAME}" width="20rem" id="DRI_NAME" placeholder="Ingresar Nombre"/>
 							<Label text="Apellido" />
-							<Input value="{newRouteModel>/DRIVER/DRI_LASTNAME}" width="20rem" id="DRI_LASTNAME" placeholder="Ingresar Apellido"/>
+							<Input value="{addRouteModel>/DRIVER/DRI_LASTNAME}" width="20rem" id="DRI_LASTNAME" placeholder="Ingresar Apellido"/>
 							<Label text="Email" />
-							<Input value="{newRouteModel>/DRIVER/DRI_EMAIL}" width="20rem" id="DRI_EMAIL" placeholder="Ingresar Email"/>
+							<Input value="{addRouteModel>/DRIVER/DRI_EMAIL}" type="Email" width="20rem" id="DRI_EMAIL" placeholder="Ingresar Email"/>
 							<Label text="Telefono"/>
-							<Input value="{newRouteModel>/DRIVER/DRI_PHONE}" width="20rem" id="DRI_PHONE" placeholder="Ingresar Telefono"/>
+							<Input value="{addRouteModel>/DRIVER/DRI_PHONE}" width="20rem" id="DRI_PHONE" placeholder="Ingresar Telefono"/>
 						</form:SimpleForm>
 						<HBox
 							alignItems="Center"
@@ -108,7 +118,7 @@
 							width="100%">
 							<Label text="Carrier company"  class="sapUiTinyMargin" />
 							<SegmentedButton selectionChange="setCarrierCompany" width="15rem" id="selectedCarrierCompany"
-													selectedKey="{/selectedCarrierCompany}" >
+													 selectedKey="{/selectedCarrierCompany}" >
 										<items>
 											<SegmentedButtonItem key="Ypf"
 																text="YPF" class="sapUiTinyMargin"/>
@@ -130,13 +140,13 @@
 						<form:SimpleForm
 								editable="true">
 							<Label text="ID Cargamento" />
-							<Input value="{newRouteModel>/SHIPMENT/SHP_ID}" width="20rem" id="SHP_ID" placeholder="Ingresar ID"/>
+							<Input value="{addRouteModel>/SHIPMENT/SHP_ID}" width="20rem" id="SHP_ID" placeholder="Ingresar ID"/>
 							<Label text="Tipo" />
-							<Input value="{newRouteModel>/SHIPMENT/SHP_TYPE}" width="20rem" id="SHP_TYPE" placeholder="Ingresar Tipo"/>
+							<Input value="{addRouteModel>/SHIPMENT/SHP_TYPE}" width="20rem" id="SHP_TYPE" placeholder="Ingresar Tipo"/>
 							<Label text="Material" />
-							<Input value="{newRouteModel>/SHIPMENT/SHP_MATERIAL}" width="20rem" id="SHP_MATERIAL" placeholder="Ingresar Material"/>
+							<Input value="{addRouteModel>/SHIPMENT/SHP_MATERIAL}" width="20rem" id="SHP_MATERIAL" placeholder="Ingresar Material"/>
 							<Label text="Cantidad" />
-							<Input value="{newRouteModel>/SHIPMENT/SHP_AMOUNT}" width="20rem" id="SHP_AMOUNT" placeholder="Ingresar Cantidad"/>
+							<Input value="{addRouteModel>/SHIPMENT/SHP_AMOUNT}" width="20rem" id="SHP_AMOUNT" placeholder="Ingresar Cantidad"/>
 						</form:SimpleForm>
 					</WizardStep>
                     
@@ -149,47 +159,72 @@
 							showIcon="true"/>
 							<form:SimpleForm
 								layout="ColumnLayout"
-								editable="true">
+								editable="true"
+								title="Revision de Ruta"
+								columnsM="2"
+								columnsL="3"
+								columnsXL="4">
 								<form:content>
+									<core:Title text="Info de la ruta"/>
+									<Label text="Distancia" />
+									<Text text="{addRouteModel>/ROU_DISTANCE}"/>
+									<Label text="Tiempo estimado" />
+									<Text text="{addRouteModel>/ROU_ESTIMATEDTIME}"/>
 									<core:Title text="Origen"/>
-									<Label text="Origen" />
-									<Text text="datosOrigen"  />
+									<Label text="Pais"/>
+									<Text text="{addRouteModel>/LOCATION_FROM/LO_CITY}"/>
+									<Label text="Provincia" />
+									<Text text="{addRouteModel>/LOCATION_FROM/LO_STATE}"/>
+									<Label text="Ciudad" />
+									<Text text="{addRouteModel>/LOCATION_FROM/LO_COUNTRY}"/>
+									<Label text="Latitud" />
+									<Text text="{addRouteModel>/LOCATION_FROM/LO_LATITUDE}"/>
+									<Label text="Longitud" />
+									<Text text="{addRouteModel>/LOCATION_FROM/LO_LONGITUDE}"/>
 									<core:Title text="Destino"/>
-									<Label text="Destino" />
-									<Text text="datosDestino"/>
+									<Label text="Pais" />
+									<Text text="{addRouteModel>/LOCATION_TO/LO_CITY}"  />
+									<Label text="Provincia" />
+									<Text text="{addRouteModel>/LOCATION_TO/LO_STATE}"/>
+									<Label text="Ciudad" />
+									<Text text="{addRouteModel>/LOCATION_TO/LO_COUNTRY}"/>
+									<Label text="Latitud" />
+									<Text text="{addRouteModel>/LOCATION_TO/LO_LATITUDE}"/>
+									<Label text="Longitud" />
+									<Text text="{addRouteModel>/LOCATION_TO/LO_LONGITUDE}"/>
 									<core:Title text="Vehiculo"/>
 									<Label text="ID Vehiculo" />
-									<Text text="{newRouteModel>/VEHICLE/VEH_ID}"  />
+									<Text text="{addRouteModel>/VEHICLE/VEH_ID}"  />
 									<Label text="Marca" />
-									<Text text="{newRouteModel>/VEHICLE/VEH_BRAND}"/>
+									<Text text="{addRouteModel>/VEHICLE/VEH_BRAND}"/>
 									<Label text="Modelo" />
-									<Text text="{newRouteModel>/VEHICLE/VEH_MODEL}"/>
+									<Text text="{addRouteModel>/VEHICLE/VEH_MODEL}"/>
 									<Label text="Tipo" />
-									<Text text="{newRouteModel>/VEHICLE/VEH_TYPE}"/>
+									<Text text="{addRouteModel>/VEHICLE/VEH_TYPE}"/>
 									<Label text="Patente" />
-									<Text text="{newRouteModel>/VEHICLE/VEH_PATENT}"/>
+									<Text text="{addRouteModel>/VEHICLE/VEH_PATENT}"/>
 									<core:Title text="Transportista"/>
 									<Label text="Conductor ID" />
-									<Text text="{newRouteModel>/DRIVER/DRI_ID}"/>
+									<Text text="{addRouteModel>/DRIVER/DRI_ID}"/>
 									<Label text="Nombre" />
-									<Text text="{newRouteModel>/DRIVER/DRI_NAME}" />
+									<Text text="{addRouteModel>/DRIVER/DRI_NAME}" />
 									<Label text="Apellido" />
-									<Text text="{newRouteModel>/DRIVER/DRI_LASTNAME}"/>
+									<Text text="{addRouteModel>/DRIVER/DRI_LASTNAME}"/>
 									<Label text="Email" />
-									<Text text="{newRouteModel>/DRIVER/DRI_EMAIL}" />
+									<Text text="{addRouteModel>/DRIVER/DRI_EMAIL}" />
 									<Label text="Telefono"/>
-									<Text text="{newRouteModel>/DRIVER/DRI_PHONE}"/>
+									<Text text="{addRouteModel>/DRIVER/DRI_PHONE}"/>
 									<Label text="Empresa de transporte"/>
 									<Text text="{/selectedCarrierCompany}"/>
 									<core:Title text="Shipment"/>
 									<Label text="ID Cargamento" />
-									<Text text="{newRouteModel>/SHIPMENT/SHP_ID}"/>
+									<Text text="{addRouteModel>/SHIPMENT/SHP_ID}"/>
 									<Label text="Tipo" />
-									<Text text="{newRouteModel>/SHIPMENT/SHP_TYPE}"/>
+									<Text text="{addRouteModel>/SHIPMENT/SHP_TYPE}"/>
 									<Label text="Material" />
-									<Text text="{newRouteModel>/SHIPMENT/SHP_MATERIAL}"/>
+									<Text text="{addRouteModel>/SHIPMENT/SHP_MATERIAL}"/>
 									<Label text="Cantidad" />
-									<Text text="{newRouteModel>/SHIPMENT/SHP_AMOUNT}"/>
+									<Text text="{addRouteModel>/SHIPMENT/SHP_AMOUNT}"/>
 								</form:content>	
 							</form:SimpleForm>
 					</WizardStep>

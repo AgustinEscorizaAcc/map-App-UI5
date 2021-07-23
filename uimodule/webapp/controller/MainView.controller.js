@@ -20,7 +20,6 @@ sap.ui.define(
                 this._mViewSettingsDialogs = {};
                 var oModel = new JSONModel();
                 this.getView().setModel(oModel);
-                this.getView().setModel(oModel, "newRouteModel");
             },
             loadRoutesModel: async function(){
                 const oResponse = await Services.getLocalJSON(
@@ -101,6 +100,9 @@ sap.ui.define(
                 oBinding.sort(aSorters);
             },
             onAdd: function(){
+                let oModel = new JSONModel();
+                this.getOwnerComponent().setModel(oModel, "addRouteModel");
+                this.getOwnerComponent().setModel(oModel, "inputRoute");
                 this.navTo(Constants.targets.CREATE_ROUTE);
             },
         });
