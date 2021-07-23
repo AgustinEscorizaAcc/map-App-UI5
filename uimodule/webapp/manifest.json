@@ -80,6 +80,11 @@
           "name": "RouteDetail",
           "pattern": "RouteDetail",
           "target": "RouteDetailTarget"
+        },
+        {
+          "name": "CreateRoute",
+          "pattern": "CreateRoute",
+          "target": "CreateRouteTarget"
         }
       ],
       "targets": {
@@ -93,6 +98,11 @@
           "viewType": "XML",
           "viewId": "routeDetail",
           "viewName": "RouteDetail"
+        },
+        "CreateRouteTarget":{
+          "viewType": "XML",
+          "viewId": "createRoute",
+          "viewName": "CreateRoute"
         }
       }
     }

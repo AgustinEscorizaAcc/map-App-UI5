@@ -39,8 +39,7 @@
 				</uxap:snappedTitleOnMobile>
         <uxap:actions>
           <uxap:ObjectPageHeaderActionButton icon="sap-icon://nav-back" type="Transparent" press="onNavBack" tooltip="{i18n>routeDetailBtnBack}"/>
-					<Button text="Guardar" type="Emphasized" />
-					<Button text="Cancelar" />
+					<Button text="Editar" type="Emphasized" />
         </uxap:actions>
       </uxap:ObjectPageDynamicHeaderTitle>
     </uxap:headerTitle>

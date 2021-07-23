@@ -28,7 +28,6 @@
 
                     </f:content>
                     <f:actions>
-                        <Button text="Crear" type="Emphasized" press="onPressCreate"/>
                         <Button icon="sap-icon://action" type="Transparent"/>
                     </f:actions>
                     <f:navigationActions>
@@ -41,7 +40,8 @@
             <f:header>
             </f:header>
             <f:content>
-                <Table
+                <VBox>
+                    <Table
                     showNoData="false">
                         <headerToolbar>
                             <OverflowToolbar>
@@ -66,30 +66,19 @@
                                 </FacetFilter> -->
                                 <ToolbarSpacer/>
                                 <SearchField width="20%" placeholder="Buscar por codigo" class="sapUiSmallMargin" liveChange="onFilterRoutes"/>
-                                <!-- <Select
-                                    class="sapUiSmallMargin"
-                                    forceSelection="true"
-                                    selectedKey="{utilsModel>/driversHeaderFilter}"
-                                    items="{driversSorterAndFilterModel>/}">
-                                    <core:Item key="{driversSorterAndFilterModel>key}" text="{driversSorterAndFilterModel>name}" />
-                                </Select> -->
-                                <Button
+                                <OverflowToolbarButton icon="sap-icon://add" type="Transparent" press="onAdd"/>
+                                <OverflowToolbarButton
                                     tooltip="Sort"
                                     icon="sap-icon://sort"
                                     press="onSortRoutesButtonPressed"
                                     ariaHasPopup="Dialog"/>
-                                <!-- <Button icon="sap-icon://action-settings" press="onPersoButtonPressedDri" >
-                                    <layoutData>
-                                        <OverflowToolbarLayoutData priority="NeverOverflow" />
-                                    </layoutData>
-                                </Button> -->
                             </OverflowToolbar>
                         </headerToolbar>
                     </Table>
                     <!--Aca va el ScrollBar-->
                     <ScrollContainer  width="100%" height="40rem" horizontal="true" vertical="true" focusable="true" >
                     <Table
-                        id="driversTable"
+                        id="routesTable"
                         inset="false"
                         items="{RoutesModel>/}">
                         <columns>   
@@ -135,8 +124,8 @@
                                 <cells>
                                     <ObjectIdentifier
                                         title="{RoutesModel>ROU_ID}"/>
-                                    <ObjectStatus text="{parts: ['RoutesModel>LOCATION_FROM/LO_COUNTRY', 'RoutesModel>LOCATION_FROM/LO_CITY']}"/>
-                                    <ObjectStatus text="{parts: ['RoutesModel>LOCATION_TO/LO_COUNTRY', 'RoutesModel>LOCATION_TO/LO_CITY']}"/>
+                                    <ObjectStatus text="{parts: ['RoutesModel>LOCATION_FROM/LO_CITY','RoutesModel>LOCATION_FROM/LO_COUNTRY']}"/>
+                                    <ObjectStatus text="{parts: ['RoutesModel>LOCATION_TO/LO_CITY','RoutesModel>LOCATION_TO/LO_COUNTRY']}"/>
                                     <ObjectStatus text="{parts: ['RoutesModel>DRIVER/DRI_NAME', 'RoutesModel>DRIVER/DRI_LASTNAME']}"/>
                                     <ObjectStatus text="{RoutesModel>VEHICLE/VEH_ID}"/>
                                     <ObjectStatus text="{path: 'RoutesModel>ROU_STATUS', formatter: '.formatter.formatRouteStatusToText'}" state="{path: 'RoutesModel>ROU_STATUS', formatter: '.formatter.formatRouteStatusToState'}"  class="sapMObjectStatusMedium"/>         
@@ -145,6 +134,7 @@
                         </items>
                     </Table> 
                     </ScrollContainer>
+                </VBox>
             </f:content>
             <f:footer>
             </f:footer>

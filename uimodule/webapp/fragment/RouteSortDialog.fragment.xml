@@ -1,0 +1,16 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<ViewSettingsDialog
+		confirm="onSortRoutesConfirm">
+		<sortItems>
+			<ViewSettingsItem text="Id de Ruta" key="ROU_ID" selected="true" />
+            <ViewSettingsItem text="From" key="LOCATION_FROM/LO_CITY" />
+			<ViewSettingsItem text="To" key="LOCATION_TO/LO_CITY" />
+			<ViewSettingsItem text="Driver" key="DRIVER/DRI_NAME" />
+            <ViewSettingsItem text="Vehicle" key="VEHICLE/VEH_ID" />
+			<ViewSettingsItem text="Status" key="ROU_STATUS" />
+		</sortItems>
+	</ViewSettingsDialog>
+</core:FragmentDefinition>
+<!-- DRIVER/DRI_LASTNAME -->

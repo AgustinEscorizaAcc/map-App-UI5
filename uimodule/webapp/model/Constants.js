@@ -13,7 +13,8 @@ sap.ui.define(
         },
         targets: {
           ROUTE_DETAIL: "RouteDetail",
-          MAIN_VIEW: "RouteMainView"
+          MAIN_VIEW: "RouteMainView",
+          CREATE_ROUTE: "CreateRoute"
         },
       };
       return Constants;

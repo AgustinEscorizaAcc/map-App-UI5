@@ -1,0 +1,209 @@
+<mvc:View controllerName="com.YPF.mapApp.controller.CreateRoute"
+	displayBlock="true"
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core"
+	xmlns:f="sap.f"
+	xmlns:form="sap.ui.layout.form"
+	xmlns:u="sap.ui.unified"
+	xmlns:layout="sap.ui.layout"
+	xmlns:html="http://www.w3.org/1999/xhtml"
+	xmlns:mvc="sap.ui.core.mvc">
+        <f:DynamicPage
+            stickySubheaderProvider="CreateRouteWizard"
+			toggleHeaderOnTitleClick="false"
+			class="sapUiNoContentPadding"
+			showFooter="true">
+            <f:title>
+                <f:DynamicPageTitle>
+					<f:heading>
+						<Title text="Crear una ruta"/>
+					</f:heading>
+					<f:navigationActions>
+						<Button
+								icon="sap-icon://full-screen"
+								type="Transparent" />
+						<Button
+								icon="sap-icon://exit-full-screen"
+								type="Transparent" />
+						<Button
+								icon="sap-icon://decline"
+								type="Transparent" 
+								press="handleWizardCancel"/>
+					</f:navigationActions>
+				</f:DynamicPageTitle>
+            </f:title>
+            <f:content>
+                <Wizard id="CreateRouteWizard"
+						class="sapUiResponsivePadding--header sapUiResponsivePadding--content"
+						showNextButton="false"
+						renderMode="Page">
+					<WizardStep id="routeStep"
+						title="Route"
+						validated="true"
+						activate="productTypeActivate">
+						<MessageStrip class="sapUiSmallMarginBottom"
+							text="Carga de informacion sobre destino y origen de la ruta (waypoints?)"
+							showIcon="true"/>
+						<form:SimpleForm
+								editable="true">
+							<Label text="Origen" required="true"/>
+							<Input  id="origen" width="20rem" placeholder="Ingresar origen" textFormatMode="KeyValue" value="{inputRoute>/Origen}"></Input>
+							<Label text="Destino" required="true"/>
+							<Input  id="destino" width="20rem" placeholder="Ingresar destino" value="{inputRoute>/Destination}"></Input>
+						</form:SimpleForm>
+						<VBox alignItems="Center">
+							<Button text="Marcar Ruta" press="onDrawRoute" class="sapUiSmallMarginEnd"/>
+							<!-- <html:div height="26rem" width="100%" id="id_GMapContainer">
+
+							</html:div> -->
+							<HBox height="26rem" width="90%" id="id_GMapContainer" fitContainer="true" justifyContent="Center" alignItems="Center" class="sapUiNoContentPadding sapUiSmallMargin">
+
+							</HBox>
+						</VBox>
+					</WizardStep>
+                    <WizardStep id="routeVehicleStep"
+								title="Route Vehicle"
+								validated="true"
+								activate="productTypeActivate">
+						<MessageStrip class="sapUiSmallMarginBottom"
+							text="Informacion del vehiculo que va a realizar el transporte"
+							showIcon="true"/>
+						<form:SimpleForm
+								editable="true">
+							<Label text="ID Vehiculo" />
+							<Input value="{newRouteModel>/VEHICLE/VEH_ID}" width="20rem" id="VEH_ID" placeholder="Ingresar ID"/>
+							<Label text="Marca" />
+							<Input value="{newRouteModel>/VEHICLE/VEH_BRAND}" width="20rem" id="VEH_BRAND" placeholder="Ingresar Marca"/>
+							<Label text="Modelo" />
+							<Input value="{newRouteModel>/VEHICLE/VEH_MODEL}" width="20rem" id="VEH_MODEL" placeholder="Ingresar Modelo"/>
+							<Label text="Tipo" />
+							<Input value="{newRouteModel>/VEHICLE/VEH_TYPE}" width="20rem" id="VEH_TYPE" placeholder="Ingresar Tipo"/>
+							<Label text="Patente" />
+							<Input value="{newRouteModel>/VEHICLE/VEH_PATENT}" width="20rem" id="VEH_PATENT" placeholder="Ingresar Patente"/>
+						</form:SimpleForm>
+					</WizardStep>
+                    <WizardStep id="carrierStep"
+								title="Carrier"
+								validated="true"
+								activate="productTypeActivate">
+						<MessageStrip class="sapUiSmallMarginBottom"
+							text="Informacion sobre quien se encontrara a cargo del transporte"
+							showIcon="true"/>
+						<form:SimpleForm
+								editable="true">
+							<Label text="Conductor ID" />
+							<Input value="{newRouteModel>/DRIVER/DRI_ID}" width="20rem" id="DRI_ID" placeholder="Ingresar ID"/>
+							<Label text="Nombre" />
+							<Input value="{newRouteModel>/DRIVER/DRI_NAME}" width="20rem" id="DRI_NAME" placeholder="Ingresar Nombre"/>
+							<Label text="Apellido" />
+							<Input value="{newRouteModel>/DRIVER/DRI_LASTNAME}" width="20rem" id="DRI_LASTNAME" placeholder="Ingresar Apellido"/>
+							<Label text="Email" />
+							<Input value="{newRouteModel>/DRIVER/DRI_EMAIL}" width="20rem" id="DRI_EMAIL" placeholder="Ingresar Email"/>
+							<Label text="Telefono"/>
+							<Input value="{newRouteModel>/DRIVER/DRI_PHONE}" width="20rem" id="DRI_PHONE" placeholder="Ingresar Telefono"/>
+						</form:SimpleForm>
+						<HBox
+							alignItems="Center"
+							justifyContent="Center"
+							width="100%">
+							<Label text="Carrier company"  class="sapUiTinyMargin" />
+							<SegmentedButton selectionChange="setCarrierCompany" width="15rem" id="selectedCarrierCompany"
+													selectedKey="{/selectedCarrierCompany}" >
+										<items>
+											<SegmentedButtonItem key="Ypf"
+																text="YPF" class="sapUiTinyMargin"/>
+											<SegmentedButtonItem key="Scordina"  class="sapUiTinyMargin"
+																text="Scordina"/>
+											<SegmentedButtonItem key="FedEx" class="sapUiTinyMargin"
+																text="FedEx"/>
+										</items>
+							</SegmentedButton>
+						</HBox>
+					</WizardStep>
+                    <WizardStep id="shipmentStep"
+								title="Shipment"
+								validated="true"
+								activate="productTypeActivate">
+						<MessageStrip class="sapUiSmallMarginBottom"
+							text="Informacion del cargamento a transportar"
+							showIcon="true"/>
+						<form:SimpleForm
+								editable="true">
+							<Label text="ID Cargamento" />
+							<Input value="{newRouteModel>/SHIPMENT/SHP_ID}" width="20rem" id="SHP_ID" placeholder="Ingresar ID"/>
+							<Label text="Tipo" />
+							<Input value="{newRouteModel>/SHIPMENT/SHP_TYPE}" width="20rem" id="SHP_TYPE" placeholder="Ingresar Tipo"/>
+							<Label text="Material" />
+							<Input value="{newRouteModel>/SHIPMENT/SHP_MATERIAL}" width="20rem" id="SHP_MATERIAL" placeholder="Ingresar Material"/>
+							<Label text="Cantidad" />
+							<Input value="{newRouteModel>/SHIPMENT/SHP_AMOUNT}" width="20rem" id="SHP_AMOUNT" placeholder="Ingresar Cantidad"/>
+						</form:SimpleForm>
+					</WizardStep>
+                    
+                    <WizardStep id="reviewStep"
+								title="Review"
+								validated="true"
+								activate="productTypeActivate">
+						<MessageStrip class="sapUiSmallMarginBottom"
+							text="Revision de datos ingresados"
+							showIcon="true"/>
+							<form:SimpleForm
+								layout="ColumnLayout"
+								editable="true">
+								<form:content>
+									<core:Title text="Origen"/>
+									<Label text="Origen" />
+									<Text text="datosOrigen"  />
+									<core:Title text="Destino"/>
+									<Label text="Destino" />
+									<Text text="datosDestino"/>
+									<core:Title text="Vehiculo"/>
+									<Label text="ID Vehiculo" />
+									<Text text="{newRouteModel>/VEHICLE/VEH_ID}"  />
+									<Label text="Marca" />
+									<Text text="{newRouteModel>/VEHICLE/VEH_BRAND}"/>
+									<Label text="Modelo" />
+									<Text text="{newRouteModel>/VEHICLE/VEH_MODEL}"/>
+									<Label text="Tipo" />
+									<Text text="{newRouteModel>/VEHICLE/VEH_TYPE}"/>
+									<Label text="Patente" />
+									<Text text="{newRouteModel>/VEHICLE/VEH_PATENT}"/>
+									<core:Title text="Transportista"/>
+									<Label text="Conductor ID" />
+									<Text text="{newRouteModel>/DRIVER/DRI_ID}"/>
+									<Label text="Nombre" />
+									<Text text="{newRouteModel>/DRIVER/DRI_NAME}" />
+									<Label text="Apellido" />
+									<Text text="{newRouteModel>/DRIVER/DRI_LASTNAME}"/>
+									<Label text="Email" />
+									<Text text="{newRouteModel>/DRIVER/DRI_EMAIL}" />
+									<Label text="Telefono"/>
+									<Text text="{newRouteModel>/DRIVER/DRI_PHONE}"/>
+									<Label text="Empresa de transporte"/>
+									<Text text="{/selectedCarrierCompany}"/>
+									<core:Title text="Shipment"/>
+									<Label text="ID Cargamento" />
+									<Text text="{newRouteModel>/SHIPMENT/SHP_ID}"/>
+									<Label text="Tipo" />
+									<Text text="{newRouteModel>/SHIPMENT/SHP_TYPE}"/>
+									<Label text="Material" />
+									<Text text="{newRouteModel>/SHIPMENT/SHP_MATERIAL}"/>
+									<Label text="Cantidad" />
+									<Text text="{newRouteModel>/SHIPMENT/SHP_AMOUNT}"/>
+								</form:content>	
+							</form:SimpleForm>
+					</WizardStep>
+                </Wizard>
+            </f:content>
+            <f:footer>
+				<OverflowToolbar>
+					<ToolbarSpacer/>
+					<Button text="Previous" visible="{/backButtonVisible}" press="onDialogBackButton" />
+					<Button text="Next Step" type="Emphasized" enabled="{/nextButtonEnabled}" visible="{/nextButtonVisible}" press="onDialogNextButton" />
+					<Button text="Review" type="Emphasized" visible="{/reviewButtonVisible}" press="onDialogNextButton" />
+					<Button text="Finish" type="Emphasized" visible="{/finishButtonVisible}" press="handleWizardSubmit" />
+					<Button	text="Cancel" type="Transparent" press="handleWizardCancel"/>
+				</OverflowToolbar>
+			</f:footer>
+        </f:DynamicPage>
+</mvc:View>
