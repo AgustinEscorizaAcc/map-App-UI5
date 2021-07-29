@@ -1,18 +1,24 @@
 <core:FragmentDefinition
     xmlns:core="sap.ui.core"
     xmlns="sap.m">
-    <Popover title="Location Info" initialFocus="id_IPGridNo" contentWidth="15rem" placement="Top" class="sapUiSizeCompact sapUiContentPadding">
+    <Popover title="Location Info" initialFocus="id_nombrePuntoGmap" contentWidth="26rem" placement="Top" class="sapUiSizeCompact sapUiContentPadding">
         <!--  <Text text="Location info" /> -->
         <!--  <Label text="Place : " ></Label>-->
-        <Input placeholder="Grid Nr..." id="id_IPGridNo"/>
+        <Title id="id_tipeLabel" text="" />
+        <VBox>
+        <Label text="Nombre:" class="sapUiSmallMarginTop"/>
+        <Input placeholder="Nombre..." id="id_nombrePuntoGmap" width="50%" class="sapUiSmallMarginBottom"/>
         <!--  <Label text="City : " ></Label>-->
-        <Input placeholder="Project ID..." id="id_IPProjID"/>
-
+        <Label text="Detalle:"/>
+        <Input placeholder="Detalle..." id="id_detallePuntoGmap" width="100%"/>
+        </VBox>
         <footer>
-            <Toolbar class="cl_PopFoot">
+            <Toolbar >
                 <ToolbarSpacer/>
-                <Button class="cl_PopFoot" id="id_BtnSave" text="Save" press="fnSave"/>
-                <Button class="cl_PopFoot" id="id_BtnCancel" text="Cancel" press="fnCancel"/>
+                <Button  id="id_BtnAddOrigin" text="Marcar Origen" press="fnSaveOrigin"/>
+                <Button  id="id_BtnAddDestination" text="Marcar Destino" press="fnSaveDestination"/>
+                <Button  id="id_BtnAddWaypoint" text="Marcar Parada" press="fnSaveWaypoint"/>
+                <Button  id="id_BtnCancel" text="Cancelar" press="fnCancel"/>
             </Toolbar>
         </footer>
     </Popover>

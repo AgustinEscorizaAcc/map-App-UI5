@@ -42,7 +42,11 @@
 						validated="true"
 						activate="productTypeActivate">
 						<MessageStrip class="sapUiSmallMarginBottom"
-							text="Carga de informacion sobre destino y origen de la ruta (waypoints?)"
+							text="Carga de informacion sobre destino, origen de la ruta y paradas:&#13;&#10;
+							Para crear marcador en mapa haga click&#13;&#10;
+							Para borrar marcador haga doble click o segundo click&#13;&#10;
+							Click sobre el marcador creado para añadir ubicaciones&#13;&#10;
+							Para quitar la ruta dibujada o los marcadores, toque el boton Quitar Marcadores"
 							showIcon="true"/>
 						<form:SimpleForm
 								editable="true">
